@@ -1,21 +1,17 @@
 package com.prex.prexmod.mixin;
 
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-
 import com.prex.prexmod.IPrexEMC;
-import cpw.mods.fml.common.FMLLog;
+import moze_intel.projecte.playerData.TransmutationProps;
 import net.minecraft.nbt.NBTTagCompound;
-
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-
-import moze_intel.projecte.playerData.TransmutationProps;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 
 @Mixin(TransmutationProps.class)
@@ -57,7 +53,7 @@ public class ProjectEEMCMixin implements IPrexEMC {
             double value,
             CallbackInfo ci
     ){//同步EMC
-        FMLLog.info("aValue = %s", value);
+//        FMLLog.info("aValue = %s", value);
 
 //        prex$emc =new BigInteger(Double.toString(value));
 ////                BigInteger.valueOf((long)value);

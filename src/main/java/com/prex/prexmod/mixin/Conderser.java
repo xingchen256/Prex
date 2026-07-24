@@ -1,20 +1,19 @@
 package com.prex.prexmod.mixin;
 
 import com.prex.prexmod.emc.PrEmcMap;
-import cpw.mods.fml.common.FMLLog;
 import moze_intel.projecte.gameObjs.container.CondenserMK2Container;
-import moze_intel.projecte.gameObjs.container.slots.condenser.SlotCondenserInput;
 import moze_intel.projecte.gameObjs.container.slots.condenser.SlotCondenserMK2Lock;
 import moze_intel.projecte.gameObjs.tiles.CondenserTile;
 import moze_intel.projecte.gameObjs.tiles.TileEmc;
 import moze_intel.projecte.utils.EMCHelper;
 import moze_intel.projecte.utils.ItemHelper;
-import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.*;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
@@ -56,7 +55,6 @@ public abstract class Conderser extends TileEmc{
             ItemStack stack = func_70301_a(i);
             if (stack == null || isStackEqualToLock(stack)) {continue;}
             if (stack.stackSize <= 0) {inventory[i] = null;continue;}
-            FMLLog.info("aaaa %s:%s",stack,lock);
             this.func_70298_a(i, 1);
             if(PrEmcMap.contains(stack)) this.addEMC(PrEmcMap.get(stack).doubleValue());
             else this.addEMC(EMCHelper.getEmcValue(stack));

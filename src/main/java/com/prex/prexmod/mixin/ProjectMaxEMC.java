@@ -6,7 +6,6 @@ import com.prex.prexmod.block.PrExBlocks;
 import com.prex.prexmod.emc.PrEXEMC;
 import com.prex.prexmod.emc.PrEmcMap;
 import com.prex.prexmod.item.PrExItems;
-import cpw.mods.fml.common.FMLLog;
 import moze_intel.projecte.emc.SimpleStack;
 import moze_intel.projecte.gameObjs.container.inventory.TransmutationInventory;
 import moze_intel.projecte.playerData.Transmutation;
@@ -60,7 +59,6 @@ public class ProjectMaxEMC {
     }
     @Inject(method = "removeEmc",at=@At("HEAD"),cancellable = true,remap = false)//我也不知道留着还有啥用了
     private void twa(double value,CallbackInfo ci){
-        FMLLog.info("aaaaaFuck");
         PrEXEMC.add(this.player, BigDecimal.valueOf(-value).toBigInteger());
         this.emc=PrEXEMC.get(this.player).doubleValue();
 //        FMLLog.info("qqq"+value);

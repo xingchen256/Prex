@@ -2,7 +2,6 @@ package com.prex.prexmod.mixin;
 
 import com.prex.prexmod.emc.PrEmcMap;
 import com.prex.prexmod.emc.PrEmcMapV;
-import cpw.mods.fml.common.FMLLog;
 import moze_intel.projecte.emc.NormalizedSimpleStack;
 import moze_intel.projecte.emc.SimpleGraphMapper;
 import moze_intel.projecte.emc.SimpleStack;
@@ -14,7 +13,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Coerce;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
 
 import java.lang.reflect.Field;
 import java.math.BigInteger;
@@ -50,11 +48,11 @@ public  class RecipeItemEmc{
             }
             NormalizedSimpleStack.NSSItem stack = (NormalizedSimpleStack.NSSItem) output;
             PrEmcMap.put(new SimpleStack(new ItemStack((Item)Item.itemRegistry.getObject(stack.itemName),1,stack.damage)),result );
-            FMLLog.info(stack.itemName+String.format(": %s",result));
+//            FMLLog.info(stack.itemName+String.format(": %s",result));
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         }
-        FMLLog.warning("FQWW Conversion result: "+ conversion +result);
+//        FMLLog.warning("FQWW Conversion result: "+ conversion +result);
         cir.setReturnValue(Fraction.getFraction(Integer.MAX_VALUE,1));
 
     }
