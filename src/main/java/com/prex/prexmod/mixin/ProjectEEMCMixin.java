@@ -25,8 +25,6 @@ public class ProjectEEMCMixin implements IPrexEMC {
     @Unique
     private BigInteger prex$emc = BigInteger.ZERO;
 
-
-
     /*
      * 读取 EMC
      */
