@@ -1,0 +1,16 @@
+[
+    {
+      "modid": "${modid}",
+      "name": "${modname}",
+      "description": "${moddescription}",
+      "version": "${modversion}",
+      "mcversion": "${mcversion}",
+      "url": "https://www.baidu.com",
+      "updateUrl": "",
+      "authorList": ["_Xing_chen_"],
+      "credits": "A/N",
+      "logoFile": "",
+      "screenshots": [],
+      "dependencies": ["required-after:ProjectE"]
+    }
+]

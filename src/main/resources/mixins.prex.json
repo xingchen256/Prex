@@ -1,0 +1,26 @@
+{
+  "minVersion": "0.3.1",
+  "package": "com.prex.prexmod.mixin",
+  "refmap": "mixins.prex.refmap.json",
+  "compatibilityLevel": "JAVA_8",
+  "required": false,
+  "mixins": [
+    "Conderser",
+    "FuelMap",
+    "ItemConsume",
+    "ItemEMCH",
+    "ItemEMCM",
+    "ItemEMCT",
+    "ItemEMCTC",
+    "ItemInput",
+    "ItemLock",
+    "ItemTips",
+    "playerget",
+    "ProjectEEMCMixin",
+    "ProjectGUI",
+    "ProjectMaxEMC",
+    "RecipeItemEmc",
+    "tbb",
+    "Te"
+  ]
+}
