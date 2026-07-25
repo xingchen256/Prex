@@ -16,6 +16,9 @@ public class QWQ {
     private static Map<EntityPlayer,BigInteger> qwq=new HashMap<EntityPlayer,BigInteger>();
     public static String happy="ProjectReExtendedExchange";
     private static BigInteger rEmcs=BigInteger.ZERO;
+    public static boolean hasRemcs(EntityPlayer player){
+        return qwq.containsKey(player);
+    }
     public static BigInteger getRemcs(EntityPlayer player){
         if(player==null)return BigInteger.ZERO;
         if(qwq.containsKey(player))return qwq.get(player);
@@ -23,6 +26,10 @@ public class QWQ {
     }
     public static void setRemcs(EntityPlayer a, BigInteger b){
         if(a!=null){
+            if(b.compareTo(BigInteger.ZERO)==0){
+                qwq.remove(a);
+                return;
+            }
             qwq.put(a,b);
         }
     }

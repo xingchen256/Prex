@@ -2,7 +2,6 @@ package com.prex.prexmod.block;
 
 import com.prex.prexmod.QWQ;
 import com.prex.prexmod.emc.PrEXEMC;
-import moze_intel.projecte.playerData.Transmutation;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -41,6 +40,7 @@ public class TilePowerFlower extends TileEntity {
             if(matter==0) {
                 matter=getmatter();//避免重复获取
                 gen=BigInteger.valueOf( PowerFlower.gen[matter]);
+                markDirty();
             }
             if(t instanceof PowerFlower){
                 EntityPlayer player = worldObj.func_152378_a(this.owner);//通过uuid获取EntityPlayer
@@ -51,11 +51,11 @@ public class TilePowerFlower extends TileEntity {
                         a=true;
                     }
                     PrEXEMC.add(player, gen);
-                    if(Minecraft.getSystemTime()-time>=2000){
-                        Transmutation.sync(player);
-                        time=Minecraft.getSystemTime();
-                        markDirty();
-                    }
+//                    if(Minecraft.getSystemTime()-time>=2000){
+//                        Transmutation.sync(player);
+//                        time=Minecraft.getSystemTime();
+//                        markDirty();
+//                    }
                 }else {a=false;}
             }
         }

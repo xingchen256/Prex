@@ -7,6 +7,7 @@ import com.prex.prexmod.block.*;
 import com.prex.prexmod.emc.NetworkHandler;
 import com.prex.prexmod.item.PrExItems;
 import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -73,6 +74,7 @@ public class ExampleMod {
                 new ObjModelLoader()
         );
         NetworkHandler.init();
+        FMLCommonHandler.instance().bus().register(new powerFlowerEven());
 
 //        PrEmcMap.put(new SimpleStack(new ItemStack(Item.getItemFromBlock(PrExBlocks.matters[11]))),new BigInteger("41000047483647"));
     }
