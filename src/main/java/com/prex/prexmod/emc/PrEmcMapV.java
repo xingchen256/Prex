@@ -1,9 +1,6 @@
 package com.prex.prexmod.emc;
 
-import cpw.mods.fml.common.FMLLog;
 import moze_intel.projecte.emc.NormalizedSimpleStack;
-import moze_intel.projecte.emc.SimpleStack;
-import moze_intel.projecte.emc.collector.MappingCollector;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 

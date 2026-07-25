@@ -41,6 +41,7 @@ public class PowerFlower extends BlockContainer {
         setBlockName("power_flower_mk"+this.matter);
         setHardness(1F);
         setResistance(10F);
+        setHarvestLevel("pickaxe", 2);
         setLightLevel(6+this.matter);
         setBlockTextureName("prex:collector/"+PrExBlocks.Color[matter-1]);
     }

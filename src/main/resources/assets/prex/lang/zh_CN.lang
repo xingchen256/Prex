@@ -81,7 +81,7 @@ tile.collector_mk12.name=黄物质收集器 [MK12]
 tile.collector_mk13.name=橙物质收集器 [MK13]
 tile.collector_mk14.name=白物质收集器 [MK14]
 tile.collector_mk15.name=渐消物质收集器 [MK15]
-tile.collector_mk16.name=终极物质收集器 [MK16]
+tile.collector_mk16.name=终极收集器 [MK16]
 
 tile.power_flower_mk1.name=基础力量花盆栽罐 [MK1]
 tile.power_flower_mk2.name=暗物质力量花盆栽罐 [MK2]
@@ -98,7 +98,7 @@ tile.power_flower_mk12.name=黄物质力量花盆栽罐 [MK12]
 tile.power_flower_mk13.name=橙物质力量花盆栽罐 [MK13]
 tile.power_flower_mk14.name=白物质力量花盆栽罐 [MK14]
 tile.power_flower_mk15.name=渐消物质力量花盆栽罐 [MK15]
-tile.power_flower_mk16.name=终极物质力量花盆栽罐 [MK16]
+tile.power_flower_mk16.name=终极力量花盆栽罐 [MK16]
 
 tile.ccollector_mk1.name=基础致密收集器 [MK1]
 tile.ccollector_mk2.name=暗物质致密收集器 [MK2]
@@ -115,7 +115,7 @@ tile.ccollector_mk12.name=黄物质致密收集器 [MK12]
 tile.ccollector_mk13.name=橙物质致密收集器 [MK13]
 tile.ccollector_mk14.name=白物质致密收集器 [MK14]
 tile.ccollector_mk15.name=渐消物质致密收集器 [MK15]
-tile.ccollector_mk16.name=终极物质致密收集器 [MK16]
+tile.ccollector_mk16.name=终极致密收集器 [MK16]
 
 tile.emc_link_mk1.name=基础EMC接口 [MK1]
 tile.emc_link_mk2.name=暗物质EMC接口 [MK2]
@@ -132,7 +132,15 @@ tile.emc_link_mk12.name=黄物质EMC接口 [MK12]
 tile.emc_link_mk13.name=橙物质EMC接口 [MK13]
 tile.emc_link_mk14.name=白物质EMC接口 [MK14]
 tile.emc_link_mk15.name=渐消物质EMC接口 [MK15]
-tile.emc_link_mk16.name=终极物质EMC接口 [MK16]
+tile.emc_link_mk16.name=终极EMC接口 [MK16]
+
+tile.prex_speed_update_block_mk1.name=红物质时间立场加速器
+tile.prex_speed_update_block_mk2.name=粉红物质时间立场加速器
+tile.prex_speed_update_block_mk3.name=紫罗兰物质时间立场加速器
+tile.prex_speed_update_block_mk4.name=绿物质时间立场加速器
+tile.prex_speed_update_block_mk5.name=橙色物质时间立场加速器
+tile.prex_speed_update_block_mk6.name=终极时间立场加速器
+
 
 item.pe_magnum_star_1.name=一级马格南能量之心
 item.pe_magnum_star_2.name=二级马格南能量之心

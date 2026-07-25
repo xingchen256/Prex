@@ -12,9 +12,9 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 
-public class Relay_Item extends ItemBlock {
+public class RelayItem extends ItemBlock {
 
-    public Relay_Item(Block p_i45328_1_) {
+    public RelayItem(Block p_i45328_1_) {
         super(p_i45328_1_);
     }
 

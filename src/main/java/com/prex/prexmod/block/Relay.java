@@ -10,9 +10,7 @@ import moze_intel.projecte.gameObjs.tiles.RelayMK3Tile;
 import moze_intel.projecte.gameObjs.tiles.TileEmc;
 import moze_intel.projecte.utils.ComparatorHelper;
 import moze_intel.projecte.utils.Constants;
-import moze_intel.projecte.utils.GuiHandler;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -33,10 +31,10 @@ public class Relay extends BlockDirection
     public Relay(int tier)
     {
         super(Material.rock);
-        this.setBlockName("prex_relay_mk" + Integer.toString(tier));
+        this.setBlockName("prex_relay_mk" + tier);
         this.setLightLevel(3+tier);
         this.setCreativeTab(PREX_TAB);
-        this.setHardness(10.0f);
+        this.setHardness(8.0f);
         this.setBlockTextureName("prex:relay/"+PrExBlocks.Color[tier-1]);
         this.tier = tier;//tier>=1
     }
@@ -97,7 +95,7 @@ public class Relay extends BlockDirection
             case 1: return new RelayMK1Tile();
             case 2: return new RelayMK2Tile();
             case 3: return new RelayMK3Tile();
-            default: return new TitleRelay(tier-4);
+            default: return new TileRelay(tier-4);
         }
     }
 

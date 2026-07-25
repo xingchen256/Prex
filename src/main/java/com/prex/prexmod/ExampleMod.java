@@ -28,6 +28,8 @@ import net.minecraftforge.common.MinecraftForge;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.lang.reflect.Method;
+
 /*
 * 血的教训呀，千万不要把mod名改的比要依赖的mod先呀，
 * 不然可能找了6个小时BUG才能找到原因，
@@ -70,6 +72,18 @@ public class ExampleMod {
                 TilePowerFlower.class,
                 "prex_power_flower"
         );
+        GameRegistry.registerTileEntity(
+                TileSpeedUpdateBlock.class,
+                "prex_speed_update_block"
+        );
+        GameRegistry.registerTileEntity(
+                TileCollector.class,
+                "prex_collector"
+        );
+        GameRegistry.registerTileEntity(
+                TileRelay.class,
+                "prex_relay"
+        );
         AdvancedModelLoader.registerModelHandler(
                 new ObjModelLoader()
         );
@@ -92,9 +106,22 @@ public class ExampleMod {
     @Mod.EventHandler
     public void postInit(FMLPostInitializationEvent event) {
         this.obfuscated = !(Boolean)Launch.blackboard.get("fml.deobfuscatedEnvironment");
-
         recipe.init();
+        try {
+            Class<?> clazz = Class.forName(
+                    "moze_intel.projecte.gameObjs.items.TimeWatch"
+            );
 
+            Method method = clazz.getMethod(
+                    "blacklist",
+                    Class.class
+            );
+            LOG.info("ASWSS");
+            method.invoke(null, TileSpeedUpdateBlock.class);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Mod.EventHandler

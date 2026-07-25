@@ -5,6 +5,7 @@ import com.prex.prexmod.item.Matter;
 import com.prex.prexmod.item.PrExItems;
 import cpw.mods.fml.common.registry.GameRegistry;
 import moze_intel.projecte.gameObjs.ObjHandler;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -464,6 +465,42 @@ public class recipe {
                 'H', new ItemStack(PrExItems.KnowledgeShareBook, 1),
                 'Q',new ItemStack(PrExItems.finalStar , 1),
                 'A',new ItemStack(PrExItems.finalStarShard,1)
+        );
+        Block[] pww=new Block[]{PrExBlocks.matters[1],PrExBlocks.matters[3],PrExBlocks.matters[6],PrExBlocks.matters[9]};
+        for(int i=1;i<5;i++){
+            GameRegistry.addRecipe(
+                    new ItemStack(
+                            Item.getItemFromBlock(PrExBlocks.speedupdate[i]),1
+                    ),
+                    "HAH",
+                    "AQA",
+                    "HAH",
+                    'Q',new ItemStack(Item.getItemFromBlock(PrExBlocks.speedupdate[i-1]) , 1),
+                    'A',new ItemStack(Item.getItemFromBlock(pww[i-1]),1),
+                    'H',new ItemStack(ObjHandler.timeWatch,1)
+            );
+        }
+        GameRegistry.addRecipe(
+                new ItemStack(
+                        Item.getItemFromBlock(PrExBlocks.speedupdate[0]),1
+                ),
+                " A ",
+                "AQA",
+                " A ",
+                'Q',new ItemStack(ObjHandler.timeWatch , 1),
+                'A',new ItemStack(Item.getItemFromBlock(ObjHandler.matterBlock),1,1)
+        );
+        GameRegistry.addRecipe(
+                new ItemStack(
+                        Item.getItemFromBlock(PrExBlocks.speedupdate[5]),1
+                ),
+                "HDH",
+                "AQA",
+                "HDH",
+                'Q',new ItemStack(Item.getItemFromBlock(PrExBlocks.speedupdate[4]) , 1),
+                'A',new ItemStack(PrExItems.finalStarShard,1),
+                'D',new ItemStack(Item.getItemFromBlock(PrExBlocks.matters[10])),
+                'H',new ItemStack(ObjHandler.timeWatch,1)
         );
     }
 }
