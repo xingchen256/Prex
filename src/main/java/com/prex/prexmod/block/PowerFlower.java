@@ -1,8 +1,5 @@
 package com.prex.prexmod.block;
 
-import com.prex.prexmod.QWQ;
-import com.prex.prexmod.emc.PrEXEMC;
-import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,10 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-
-import java.math.BigInteger;
 
 import static com.prex.prexmod.ExampleMod.PREX_TAB;
 
@@ -100,17 +94,6 @@ public class PowerFlower extends BlockContainer {
     }
 
     @Override
-    public void onBlockHarvested(World world, int x, int y, int z,
-                                 int meta, EntityPlayer player) {//破坏
-        TileEntity te = world.getTileEntity(x,y,z);
-        if(te instanceof TilePowerFlower){
-            TilePowerFlower tile=(TilePowerFlower)te;
-            PrEXEMC.addRemcs(world.func_152378_a(tile.owner) ,BigInteger.valueOf(gen[matter]).negate());
-        }
-        super.onBlockHarvested(world, x, y, z, meta, player);
-    }
-
-    @Override
     public void onBlockPlacedBy(
             World world,
             int x, int y, int z,
@@ -125,6 +108,6 @@ public class PowerFlower extends BlockContainer {
             tile.setOwnerUUID(entity.getUniqueID());
             tile.setOwerName(entity.getCommandSenderName());
         }
-        PrEXEMC.addRemcs((EntityPlayer)entity, BigInteger.valueOf(gen[matter]));
     }
+
 }

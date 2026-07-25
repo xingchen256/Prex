@@ -2,23 +2,14 @@ package com.prex.prexmod.mixin;
 
 import com.prex.prexmod.QWQ;
 import com.prex.prexmod.emc.PrEXEMC;
-import moze_intel.projecte.gameObjs.container.CollectorMK3Container;
 import moze_intel.projecte.gameObjs.container.inventory.TransmutationInventory;
 import moze_intel.projecte.gameObjs.gui.GUITransmutation;
-import moze_intel.projecte.gameObjs.tiles.CollectorMK1Tile;
-import moze_intel.projecte.gameObjs.tiles.CollectorMK3Tile;
-import moze_intel.projecte.utils.GuiHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumChatFormatting;
-import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.ModifyArg;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.math.BigInteger;
 
@@ -37,9 +28,12 @@ public class ProjectGUI {
             EntityPlayer player = ((playerget)inv).getPlayer();
             BigInteger cww=PrEXEMC.get(player);
             String formattedEmc = getEMCString(cww);
-            if(PrEXEMC.getRemcs(player).compareTo(BigInteger.ZERO)>0){
+            if(QWQ.getRemcs(player).compareTo(BigInteger.ZERO)>0){
                 formattedEmc=formattedEmc+" "+EnumChatFormatting.DARK_GREEN+"+"
-                        +PrEXEMC.getEMCString(PrEXEMC.getRemcs(player))+"/s";
+                        +PrEXEMC.getEMCString(QWQ.getRemcs(player))+"/s";
+            }else if(QWQ.getRemcs(player).compareTo(BigInteger.ZERO)<0){
+                formattedEmc=formattedEmc+" "+EnumChatFormatting.DARK_RED
+                        +PrEXEMC.getEMCString(QWQ.getRemcs(player))+"/s";
             }
             return "EMC:"+formattedEmc;
         }

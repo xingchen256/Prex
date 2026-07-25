@@ -1,7 +1,7 @@
 package com.prex.prexmod.block;
 
+import com.prex.prexmod.QWQ;
 import com.prex.prexmod.emc.PrEXEMC;
-import moze_intel.projecte.gameObjs.container.inventory.TransmutationInventory;
 import moze_intel.projecte.playerData.Transmutation;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -18,55 +18,59 @@ public class TilePowerFlower extends TileEntity {
     public UUID owner = new UUID(0,0);
     public String ownerName="";
     public int tick=0;
-    public int matter;
-    public BigInteger storedEMC=BigInteger.ZERO;
+    public int matter=0;
+    private boolean a;
+    private BigInteger gen;
+    private long time=Minecraft.getSystemTime();
+    private Block t;
+//移除EMC存储
     public int getmatter() {
-        Block t= worldObj.getBlock(xCoord,yCoord,zCoord);
         for(PowerFlower q:PrExBlocks.power_flower){
-            if(t.equals(q)){
-                return q.matter;
-            }
+            Block a=this.getBlockType();
+            if(a.equals(q))return q.matter;
         }
         return 1;
     }
     @Override
     public void updateEntity(){
-
-
-        if(worldObj.isRemote)
-            return;
-
+        if(worldObj.isRemote) return;
         tick++;//应用加速
-        Block block =
-                worldObj.getBlock(xCoord, yCoord, zCoord
-                );
-        this.matter=getmatter();
         if(tick%20==0){
             tick=0;
-            if(block instanceof PowerFlower){
-
-
-                PowerFlower flower = (PowerFlower)block;
-
-
-                long gen =PowerFlower.gen[flower.matter];
-
-                EntityPlayer player = worldObj.func_152378_a(this.owner);
+            if(t==null) this.t=this.getBlockType();
+            if(matter==0) {
+                matter=getmatter();//避免重复获取
+                gen=BigInteger.valueOf( PowerFlower.gen[matter]);
+            }
+            if(t instanceof PowerFlower){
+                EntityPlayer player = worldObj.func_152378_a(this.owner);//通过uuid获取EntityPlayer
                 if(player!=null){
-                    PrEXEMC.add(player, BigInteger.valueOf(gen));
-                    if(!storedEMC.equals(BigInteger.ZERO)){
-                        PrEXEMC.add(player, storedEMC);
-                        storedEMC=BigInteger.ZERO;
+                    if(!a){
+                        QWQ.addRemcs(player,gen);
+                        QWQ.sync(player);
+                        a=true;
                     }
-                    Transmutation.sync(player);
-                }
-                else storedEMC = storedEMC.add(BigInteger.valueOf(gen));
-                markDirty();
-
+                    PrEXEMC.add(player, gen);
+                    if(Minecraft.getSystemTime()-time>=2000){
+                        Transmutation.sync(player);
+                        time=Minecraft.getSystemTime();
+                        markDirty();
+                    }
+                }else {a=false;}
             }
         }
-        markDirty();
     }
+
+    @Override
+    public void invalidate() {
+        super.invalidate();
+        EntityPlayer player = worldObj.func_152378_a(this.owner);
+        if(a){
+           QWQ.addRemcs(player,gen.negate());
+           QWQ.sync(player);
+        }
+    }
+
     public String getOwerName(){
         if(this.ownerName.isEmpty()){
             LOG.warn("No power flower owner name set");
@@ -79,28 +83,20 @@ public class TilePowerFlower extends TileEntity {
     public void setOwnerUUID(UUID uuid){
         this.owner = uuid;
     }
-
-
-
     @Override
     public void writeToNBT(NBTTagCompound tag){
         super.writeToNBT(tag);
         tag.setString("Owner", owner.toString());
         tag.setString("OwnerName", ownerName);
         tag.setInteger("Tick", tick);
-        tag.setString("StoredEMC", storedEMC.toString());
         markDirty();
     }
-
-
     @Override
     public void readFromNBT(NBTTagCompound tag){
         super.readFromNBT(tag);
         this. owner = UUID.fromString(tag.getString("Owner"));
         this. ownerName = tag.getString("OwnerName");
         this. tick = tag.getInteger("Tick");
-        String s= tag.getString("StoredEMC");
-        this. storedEMC= new BigInteger(s.isEmpty() ?"0":s);
     }
 
 }

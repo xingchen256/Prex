@@ -1,18 +1,16 @@
 package com.prex.prexmod.emc;
 
 
+import com.prex.prexmod.IPrexEMC;
+import moze_intel.projecte.playerData.TransmutationProps;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.entity.player.EntityPlayer;
+
 import java.math.BigInteger;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
-
-import com.prex.prexmod.IPrexEMC;
-import com.prex.prexmod.QWQ;
-import cpw.mods.fml.common.FMLLog;
-import moze_intel.projecte.playerData.TransmutationProps;
-import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.entity.player.EntityPlayer;
 
 
 public class PrEXEMC {
@@ -76,19 +74,4 @@ public class PrEXEMC {
                 get(player).add(value)
         );
     }
-
-    //remcs
-    public static QWQ gets(EntityPlayer player) {
-        return (QWQ) player.getExtendedProperties(QWQ.happy);
-    }
-    public static BigInteger getRemcs(EntityPlayer a){
-        return gets(a).getRemcs();
-    }
-    public static void setRemcs(EntityPlayer a,BigInteger b){
-        gets(a).setRemcs(b);
-    }
-    public static void addRemcs(EntityPlayer a,BigInteger b){
-        gets(a).setRemcs(getRemcs(a).add(b));
-    }
-
 }

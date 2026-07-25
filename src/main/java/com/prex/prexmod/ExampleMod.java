@@ -2,7 +2,9 @@ package com.prex.prexmod;
 
 //import com.prex.prexmod.emc.PrEMC;
 //import com.prex.prexmod.emc.playerData;
+
 import com.prex.prexmod.block.*;
+import com.prex.prexmod.emc.NetworkHandler;
 import com.prex.prexmod.item.PrExItems;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.Mod;
@@ -70,6 +72,7 @@ public class ExampleMod {
         AdvancedModelLoader.registerModelHandler(
                 new ObjModelLoader()
         );
+        NetworkHandler.init();
 
 //        PrEmcMap.put(new SimpleStack(new ItemStack(Item.getItemFromBlock(PrExBlocks.matters[11]))),new BigInteger("41000047483647"));
     }
@@ -95,7 +98,4 @@ public class ExampleMod {
     @Mod.EventHandler
     public void onServerStartingEvent(FMLServerStartingEvent event) {
     }
-//    @SubscribeEvent
-//    public void onConstruct(EntityEvent.EntityConstructing event) {
-//    }
 }

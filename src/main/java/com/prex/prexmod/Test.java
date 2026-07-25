@@ -1,11 +1,10 @@
 package com.prex.prexmod;
 
 //import com.prex.prexmod.emc.PrEMC;
-import com.prex.prexmod.block.TilePowerFlower;
+
 import com.prex.prexmod.emc.PrEXEMC;
 import cpw.mods.fml.common.FMLLog;
 import moze_intel.projecte.playerData.Transmutation;
-import moze_intel.projecte.playerData.TransmutationProps;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
@@ -26,7 +25,7 @@ public class Test extends Block {
                        "Remc="+PrEXEMC.get(p_149699_5_).toString()
                 )
         );
-        FMLLog.info(" "+PrEXEMC.getRemcs(p_149699_5_));
+        FMLLog.info(" "+QWQ.getRemcs(p_149699_5_));
         super.onBlockClicked(p_149699_1_, p_149699_2_, p_149699_3_, p_149699_4_, p_149699_5_);
     }
 }
