@@ -4,12 +4,11 @@ import com.prex.prexmod.block.PrExBlocks;
 import com.prex.prexmod.item.Matter;
 import com.prex.prexmod.item.PrExItems;
 import cpw.mods.fml.common.registry.GameRegistry;
-import moze_intel.projecte.gameObjs.customRecipes.RecipeShapelessHidden;
+import moze_intel.projecte.gameObjs.ObjHandler;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import moze_intel.projecte.gameObjs.ObjHandler;
 
 import static com.prex.prexmod.block.PrExBlocks.matters;
 
@@ -220,7 +219,7 @@ public class recipe {
                 'B', new ItemStack(ObjHandler.covalence,1,1),
                 'C', new ItemStack(ObjHandler.covalence,1),
                 'T', new ItemStack(ObjHandler.matter,1),
-                'Q', new ItemStack(ObjHandler.condenser,1)
+                'Q', new ItemStack(Item.getItemFromBlock(PrExBlocks.EmcLink[0]),1)
         );
 
         GameRegistry.addRecipe(
@@ -233,7 +232,7 @@ public class recipe {
                 'B', new ItemStack(ObjHandler.covalence,1,1),
                 'C', new ItemStack(ObjHandler.covalence,1),
                 'T', new ItemStack(ObjHandler.matter,1,1),
-                'Q', new ItemStack(ObjHandler.condenser,1)
+                'Q', new ItemStack(Item.getItemFromBlock(PrExBlocks.EmcLink[1]),1)
         );
         for (int i = 0; i< matters.length; i++){
             GameRegistry.addRecipe(
