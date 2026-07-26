@@ -466,7 +466,7 @@ public class recipe {
                 'Q',new ItemStack(PrExItems.finalStar , 1),
                 'A',new ItemStack(PrExItems.finalStarShard,1)
         );
-        Block[] pww=new Block[]{PrExBlocks.matters[1],PrExBlocks.matters[3],PrExBlocks.matters[6],PrExBlocks.matters[9]};
+        Block[] pww=new Block[]{PrExBlocks.matters[1],PrExBlocks.matters[3],PrExBlocks.matters[6],PrExBlocks.matters[9],PrExBlocks.matters[11]};
         for(int i=1;i<5;i++){
             GameRegistry.addRecipe(
                     new ItemStack(
@@ -499,8 +499,30 @@ public class recipe {
                 "HDH",
                 'Q',new ItemStack(Item.getItemFromBlock(PrExBlocks.speedupdate[4]) , 1),
                 'A',new ItemStack(PrExItems.finalStarShard,1),
-                'D',new ItemStack(Item.getItemFromBlock(PrExBlocks.matters[10])),
+                'D',new ItemStack(Item.getItemFromBlock(PrExBlocks.matters[11])),
                 'H',new ItemStack(ObjHandler.timeWatch,1)
+        );
+        for(int i=1;i<6;i++){
+            GameRegistry.addRecipe(
+                    new ItemStack(
+                            Item.getItemFromBlock(PrExBlocks.speedpowerflower[i]),1
+                    ),
+                    " A ",
+                    "AQA",
+                    " A ",
+                    'Q',new ItemStack(Item.getItemFromBlock(PrExBlocks.speedupdate[i]) , 1),
+                    'A',new ItemStack(Item.getItemFromBlock(pww[i-1]),1)
+            );
+        }
+        GameRegistry.addRecipe(
+                new ItemStack(
+                        Item.getItemFromBlock(PrExBlocks.speedpowerflower[0]),1
+                ),
+                " A ",
+                "AQA",
+                " A ",
+                'Q',new ItemStack(Item.getItemFromBlock(PrExBlocks.speedupdate[0]) , 1),
+                'A',new ItemStack(Item.getItemFromBlock(ObjHandler.matterBlock),1,1)
         );
     }
 }

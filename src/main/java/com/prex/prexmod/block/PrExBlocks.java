@@ -15,15 +15,13 @@ public class PrExBlocks {
     public static Block[] ccollector=new Block[16];
     public static PowerFlower[] power_flower=new PowerFlower[16];
     public static Block[] speedupdate=new Block[6];//红,粉红,紫罗兰,绿,橙色,终极
+    public static Block[] speedpowerflower=new Block[6];
     public static Block[] EmcLink=new Block[16];
     public static void init()
     {
         for(int i = 0; i < 16; i++)
         {
             basicRelays[i] = new Relay(i+1);
-//                    .setBlockName("basic_relay_mk" + (i + 1))
-//                    .setBlockTextureName("prex:relay/" + Color[i])
-//                    .setCreativeTab(PREX_TAB);
             GameRegistry.registerBlock(
                     basicRelays[i],
                     RelayItem.class,
@@ -34,6 +32,10 @@ public class PrExBlocks {
             speedupdate[i]=new SpeedUpdateBlock(i+1);
             GameRegistry.registerBlock(
                     speedupdate[i],SpeedUpdateItem.class,"prex_speed_update_block_mk" + (i+1));
+            speedpowerflower[i]=new SpeedUpdatePowerFlower(i+1);
+            GameRegistry.registerBlock(
+                    speedpowerflower[i], SpeedUpdatePowerFlowerItem.class,"prex_speed_power_flower_mk" + (i+1)
+            );
         }
         for(int i = 0; i < 16; i++)
         {

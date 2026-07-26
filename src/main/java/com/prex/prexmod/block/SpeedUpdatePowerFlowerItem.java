@@ -8,22 +8,20 @@ import net.minecraft.util.EnumChatFormatting;
 
 import java.util.List;
 
-public class SpeedUpdateItem extends ItemBlock {
-    private int tww=1;
-    public SpeedUpdateItem(Block block) {
-        super(block);
-        this.tww=((SpeedUpdateBlock)block).tww;
-
+public class SpeedUpdatePowerFlowerItem extends ItemBlock {
+    private int tww;
+    public SpeedUpdatePowerFlowerItem(Block p_i45328_1_) {
+        super(p_i45328_1_);
+        this.tww= ((SpeedUpdatePowerFlower)p_i45328_1_).tww;
     }
 
     @Override
     public void addInformation(ItemStack item, EntityPlayer player, List list, boolean p_77624_4_) {
         int qqw=Math.min(tww*4,8)*2;
-        list.add(EnumChatFormatting.DARK_PURPLE+"用于加速周围的方块、植物等的速度");
+        list.add(EnumChatFormatting.DARK_PURPLE+"用于加速周围力量花盆的工作速度");
         list.add(EnumChatFormatting.DARK_PURPLE+String.format("作用范围:"+EnumChatFormatting.GREEN+" %sx%sx%s",qqw,Math.min(qqw,8),qqw)+"(以自身为中心)");
-        list.add(EnumChatFormatting.DARK_PURPLE+"方块最高作用系数: "+EnumChatFormatting.BLUE+(tww*20));
-        list.add(EnumChatFormatting.DARK_PURPLE+"随机刻最高作用系数: "+EnumChatFormatting.BLUE+(tww*2));
-        list.add(EnumChatFormatting.GOLD+"放满一个区块腐竹高兴死了");
+        list.add(EnumChatFormatting.DARK_PURPLE+"加速倍率: "+EnumChatFormatting.BLUE+(tww*40));
+        list.add(EnumChatFormatting.GOLD+"对腐竹友好");
         super.addInformation(item, player, list, p_77624_4_);
     }
 }

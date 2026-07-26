@@ -42,7 +42,7 @@ public class PowerFlower extends BlockContainer {
         setHardness(1F);
         setResistance(10F);
         setHarvestLevel("pickaxe", 2);
-        setLightLevel(6+this.matter);
+        setLightLevel(10+this.matter);
         setBlockTextureName("prex:collector/"+PrExBlocks.Color[matter-1]);
     }
     @Override

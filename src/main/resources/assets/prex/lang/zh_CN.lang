@@ -141,6 +141,13 @@ tile.prex_speed_update_block_mk4.name=绿物质时间立场加速器
 tile.prex_speed_update_block_mk5.name=橙色物质时间立场加速器
 tile.prex_speed_update_block_mk6.name=终极时间立场加速器
 
+tile.prex_speed_update_block_power_flower_mk1.name=红物质力量花盆加速器
+tile.prex_speed_update_block_power_flower_mk2.name=粉红物质力量花盆加速器
+tile.prex_speed_update_block_power_flower_mk3.name=紫罗兰物质力量花盆加速器
+tile.prex_speed_update_block_power_flower_mk4.name=绿物质力量花盆加速器
+tile.prex_speed_update_block_power_flower_mk5.name=橙色物质力量花盆加速器
+tile.prex_speed_update_block_power_flower_mk6.name=终极力量花盆加速器
+
 
 item.pe_magnum_star_1.name=一级马格南能量之心
 item.pe_magnum_star_2.name=二级马格南能量之心

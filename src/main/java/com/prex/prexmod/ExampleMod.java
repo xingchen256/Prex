@@ -84,6 +84,10 @@ public class ExampleMod {
                 TileRelay.class,
                 "prex_relay"
         );
+        GameRegistry.registerTileEntity(
+                TileSpeedUpdatePowerFlower.class,
+                "prex_speed_update_power_flower"
+        );
         AdvancedModelLoader.registerModelHandler(
                 new ObjModelLoader()
         );
