@@ -24,7 +24,7 @@ public class TileSpeedUpdatePowerFlower extends TileEntity {
                 boundingBox=getEffectBounds();
             }
             lastTime = System.currentTimeMillis();
-            updatePowerFlower(worldObj,BigInteger.valueOf(tww* 20L),boundingBox);
+            updatePowerFlower(worldObj,BigInteger.valueOf(tww* 30L),boundingBox);
         }
     }
     public void updatePowerFlower(World world, BigInteger bonusTicks, AxisAlignedBB bBox){
