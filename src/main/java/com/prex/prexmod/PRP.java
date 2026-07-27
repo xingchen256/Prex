@@ -3,11 +3,9 @@ package com.prex.prexmod;
 
 import com.gtnewhorizon.gtnhmixins.ILateMixinLoader;
 import com.gtnewhorizon.gtnhmixins.LateMixin;
-import scala.actors.threadpool.Arrays;
+import cpw.mods.fml.common.Loader;
 
 import javax.annotation.Nonnull;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -43,6 +41,7 @@ public class PRP implements ILateMixinLoader {
                 "RecipeItemEmc",
                 "tbb",
                 "Te").collect(Collectors.toList());
+        if (Loader.isModLoaded("betterbuilderswands")) mixins.add("builder_wands");//兼容性修改
         return mixins;
     }
 }

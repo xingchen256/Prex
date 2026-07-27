@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "required": false,
   "mixins": [
+    "builder_wands",
     "Conderser",
     "FuelMap",
     "ItemConsume",
