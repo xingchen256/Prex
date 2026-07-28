@@ -47,6 +47,7 @@ public class TilePowerFlower extends TileEntity {
                         QWQ.sync(player);
                         a=true;
                     }
+                    if(tick <0)tick=0x7fffffff;//tick超int上限纠正
                     PrEXEMC.add(player, gen.multiply(BigInteger.valueOf((int)(tick/20))));
                 }else {a=false;return;}
             }
