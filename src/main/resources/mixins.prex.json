@@ -11,6 +11,7 @@
     "EmcCondenserBase",
     "EMCCraftingPatternMixin",
     "EmcParser",
+    "EmcReload",
     "FuelMap",
     "ItemConsume",
     "ItemEMCH",
@@ -27,7 +28,6 @@
     "ProjectMaxEMC",
     "RecipeItemEmc",
     "RemoveEmc",
-    "ResetEmc",
     "tbb",
     "Te"
   ]

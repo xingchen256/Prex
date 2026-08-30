@@ -9,9 +9,8 @@ import java.math.BigInteger;
 public class remcs implements IMessage {
 
     public String remcs;
-
-    public remcs() {}
-
+    public remcs() {
+    }
     public remcs(BigInteger remcs) {
         this.remcs = remcs.toString();
     }

@@ -174,3 +174,4 @@ item.prex_final_star_shard.name=终极之心碎片
 item.prex_final_star.name=终极之心
 
 item.knowledge_share_book.name=知识共享之书
+prex.command.set.max=抱歉值: %s超过了10^108如果您执意使用这个值可能会导致严重的后果

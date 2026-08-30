@@ -13,6 +13,10 @@ import java.util.Map;
 
 public class PrEmcMap {
     private static Map<SimpleStack, BigInteger> emc=new HashMap<>();
+    public static void setEmc(Map<SimpleStack, BigInteger> aemc){
+        emc=aemc;
+    }
+    public static Map<SimpleStack, BigInteger> gets(){return emc;}
     public static void put(SimpleStack simpleStack, BigInteger bigInteger){
         emc.put(simpleStack,bigInteger);
     }

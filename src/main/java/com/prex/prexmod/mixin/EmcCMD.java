@@ -1,12 +1,16 @@
 package com.prex.prexmod.mixin;
 
 import com.llamalad7.mixinextras.sugar.Local;
+import com.prex.prexmod.emc.NetworkHandler;
 import com.prex.prexmod.emc.PrEmcMap;
+import com.prex.prexmod.emc.PrEmcMapS;
 import com.prex.prexmod.emc.PrExEmcMapFile;
 import moze_intel.projecte.config.CustomEMCParser;
+import moze_intel.projecte.network.commands.ReloadEmcCMD;
 import moze_intel.projecte.network.commands.RemoveEmcCMD;
 import moze_intel.projecte.network.commands.SetEmcCMD;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.ChatComponentTranslation;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -15,6 +19,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /*思路修改parseInteger部分，将超过上限的设为1,
@@ -56,6 +61,9 @@ public class EmcCMD {
                 return false;
             }
             if (emc.compareTo(BigInteger.ZERO)<=0) {return false;}
+            if (emc.compareTo(BigDecimal.valueOf(Double.MAX_VALUE).toBigInteger())>=0) {
+                sender.addChatMessage(new ChatComponentTranslation("prex.command.set.max",emc));
+                return false;}
             sender.addChatMessage(new ChatComponentTranslation("pe.command.set.success", name, emc+"Please ignore the error messages"));
             return PrExEmcMapFile.addToFile(name,meta,emc) && CustomEMCParser.addToFile(name, meta, Integer.MAX_VALUE);
         }
@@ -78,17 +86,27 @@ class RemoveEmc{
 }
 @Mixin(CustomEMCParser.class)
 class EmcParser{
-    @Inject(method = "readUserData",at= @At(
-            value = "INVOKE",
-            target = "Ljava/util/Map;clear()V"),
-    remap = false)
-    private static void readUserData(CallbackInfo ci){
-        PrExEmcMapFile.readFile();
-    }
+//    @Inject(method = "readUserData",at= @At(
+//            value = "INVOKE",
+//            target = "Ljava/util/Map;clear()V"),
+//    remap = false)
+//    private static void readUserData(CallbackInfo ci){
+//        PrExEmcMapFile.readFile();
+//    }
     @Inject(method = "removeFromFile",at= @At(value = "INVOKE",
             target = "Lmoze_intel/projecte/utils/FileHelper;closeStream(Ljava/io/Closeable;)V"),
     remap = false)
     private static void removeFromFile(String name, int meta, CallbackInfoReturnable<Boolean> cir){
         PrExEmcMapFile.removeFromFile(name,meta);
+    }
+}
+@Mixin(ReloadEmcCMD.class)
+class EmcReload{
+    @Inject(method = "func_71515_b",at= @At(value = "INVOKE",
+            target = "Lmoze_intel/projecte/config/CustomEMCParser;readUserData()V"),
+    remap = false)
+    public void function(ICommandSender sender, String[] params, CallbackInfo ci){
+        PrExEmcMapFile.readFile();//读取文件
+        NetworkHandler.REmcMap.sendTo(new PrEmcMapS(PrEmcMap.gets()),(EntityPlayerMP) sender);//消息通信
     }
 }
