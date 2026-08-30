@@ -7,6 +7,10 @@
   "mixins": [
     "builder_wands",
     "Conderser",
+    "EmcCMD",
+    "EmcCondenserBase",
+    "EMCCraftingPatternMixin",
+    "EmcParser",
     "FuelMap",
     "ItemConsume",
     "ItemEMCH",
@@ -18,9 +22,12 @@
     "ItemTips",
     "playerget",
     "ProjectEEMCMixin",
+    "ProjectEMixin",
     "ProjectGUI",
     "ProjectMaxEMC",
     "RecipeItemEmc",
+    "RemoveEmc",
+    "ResetEmc",
     "tbb",
     "Te"
   ]

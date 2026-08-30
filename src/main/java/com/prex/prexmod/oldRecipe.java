@@ -5,41 +5,24 @@ import com.prex.prexmod.item.Matter;
 import com.prex.prexmod.item.PrExItems;
 import cpw.mods.fml.common.registry.GameRegistry;
 import moze_intel.projecte.gameObjs.ObjHandler;
-import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import static com.prex.prexmod.block.PrExBlocks.matters;
-
-
-public class recipe {
+public class oldRecipe {
     public static void init(){
         matter();
         fuel();
-        block();
+        recipe.block();
         relay();
         collector();
         emc_link();
         star();
-        powerflower();
+        recipe.powerflower();
         misc();
-        SpeedUpdate();
-    }
-    public static void powerflower(){
-        for(int i=0;i<PrExBlocks.power_flower.length;i++){
-            GameRegistry.addRecipe(
-                    new ItemStack(
-                            Item.getItemFromBlock(PrExBlocks.power_flower[i]),1),
-                    "QBQ",
-                    "AAA",
-                    "AAA",
-                    'A', new ItemStack(Item.getItemFromBlock(PrExBlocks.basicRelays[i]),1),
-                    'B', new ItemStack(Item.getItemFromBlock(PrExBlocks.EmcLink[i]),1),
-                    'Q', new ItemStack(Item.getItemFromBlock(PrExBlocks.ccollector[i]),1)
-            );
-        }
+        recipe.SpeedUpdate();
+
     }
     public static void relay(){
         GameRegistry.addShapelessRecipe(
@@ -70,12 +53,12 @@ public class recipe {
                         new ItemStack(ObjHandler.matter,1,1)
                 });
         //不要用循环会崩溃
-        for(int i=0;i<Matter.matter.length;i++){
+        for(int i = 0; i< Matter.matter.length; i++){
             GameRegistry.addShapelessRecipe(
                     new ItemStack(Item.getItemFromBlock(PrExBlocks.basicRelays[i+3]),1),
                     new Object[]{
                             new ItemStack(Item.getItemFromBlock(PrExBlocks.basicRelays[i+2]),1),
-                            new ItemStack(PrExBlocks.matters[i],1),
+                            new ItemStack(Matter.matter[i],1),
                     });
         }
         GameRegistry.addShapelessRecipe(
@@ -120,7 +103,7 @@ public class recipe {
                     new ItemStack(Item.getItemFromBlock(PrExBlocks.collector[i+3]),1),
                     new Object[]{
                             new ItemStack(Item.getItemFromBlock(PrExBlocks.collector[i+2]),1),
-                            new ItemStack(PrExBlocks.matters[i],1),
+                            new ItemStack(Matter.matter[i],1),
                     });
         }
         GameRegistry.addShapelessRecipe(
@@ -158,40 +141,29 @@ public class recipe {
         }
         ItemStack _q=new ItemStack(PrExItems.cStars,1,5);
         GameRegistry.addShapelessRecipe(new ItemStack(PrExItems.gStars,1),
-                new Object[]{_q,_q,_q,_q,_q,_q,_q,_q,_q});
-        GameRegistry.addShapelessRecipe(new ItemStack(PrExItems.cStars,9,5),
+                new Object[]{_q,_q,_q,_q});
+        GameRegistry.addShapelessRecipe(new ItemStack(PrExItems.cStars,4,5),
                 new Object[]{new ItemStack(PrExItems.gStars,1) });
         for(int i = 1; i < 6; ++i) {
             ItemStack input=new ItemStack(PrExItems.gStars,1,i-1);
             GameRegistry.addShapelessRecipe(new ItemStack(PrExItems.gStars,1,i),
-                    new Object[]{input,input,input,input,input,input,input,input,input});
-            GameRegistry.addShapelessRecipe(new ItemStack(PrExItems.gStars,9,i-1),
+                    new Object[]{input,input,input,input});
+            GameRegistry.addShapelessRecipe(new ItemStack(PrExItems.gStars,4,i-1),
                     new Object[]{new ItemStack(PrExItems.gStars,1,i)});
         }
-//        GameRegistry.addRecipe(
-//                new ItemStack(PrExItems.finalStarShard,1),
-//                "AAA",
-//                "ABA",
-//                "AAA",
-//                'A', new ItemStack(PrExItems.gStars,1,5),
-//                'B', new ItemStack(Items.nether_star,1)
-//        );
         GameRegistry.addRecipe(
                 new ItemStack(PrExItems.finalStarShard,1),
-                "AQA",
-                "WBW",
-                "AQA",
-                'A', new ItemStack(PrExItems.gStars,1,5),
-                'B', new ItemStack(Items.nether_star,1),
-                'Q',new ItemStack(Item.getItemFromBlock(PrExBlocks.power_flower[14]),1),
-                'W',new ItemStack(Item.getItemFromBlock(PrExBlocks.matters[11]),1)
+                "GGG",
+                "GQG",
+                "GGG",
+                'Q', new ItemStack(Items.nether_star,1),
+                'G',new ItemStack(PrExItems.gStars,1)
         );
         GameRegistry.addRecipe(
                 new ItemStack(PrExItems.finalStar,1),
-                "QAQ",
-                "ABA",
-                "QAQ",
-                'A', new ItemStack(PrExItems.finalStarShard,1),
+                "QQQ",
+                "QBQ",
+                "QQQ",
                 'B', new ItemStack(Item.getItemFromBlock(Blocks.dragon_egg) ,1),
                 'Q',new ItemStack(Item.getItemFromBlock(PrExBlocks.power_flower[15]),1)
         );
@@ -235,7 +207,7 @@ public class recipe {
                 'T', new ItemStack(ObjHandler.matter,1,1),
                 'Q', new ItemStack(Item.getItemFromBlock(PrExBlocks.EmcLink[1]),1)
         );
-        for (int i = 0; i< matters.length; i++){
+        for (int i = 0; i< PrExBlocks.matters.length; i++){
             GameRegistry.addRecipe(
                     new ItemStack(
                             Item.getItemFromBlock(PrExBlocks.EmcLink[i+3]),1
@@ -246,7 +218,7 @@ public class recipe {
                     'A', new ItemStack(ObjHandler.covalence,1,2),
                     'B', new ItemStack(ObjHandler.covalence,1,1),
                     'C', new ItemStack(ObjHandler.covalence,1),
-                    'T', new ItemStack(Item.getItemFromBlock(PrExBlocks.matters[i]),1),
+                    'T', new ItemStack(Matter.matter[i],1),
                     'Q', new ItemStack(Item.getItemFromBlock(PrExBlocks.EmcLink[i+2]),1)
             );
         }
@@ -264,95 +236,29 @@ public class recipe {
                 'Q', new ItemStack(Item.getItemFromBlock(PrExBlocks.EmcLink[14]),1)
         );
     }
-    public static void block(){
-        for (int i = 0; i< matters.length; i++){//物质块注册
-            GameRegistry.addRecipe(
-                    new ItemStack(
-                            Item.getItemFromBlock(matters[i]),1
-                    ),
-                    "HHH",
-                    "HHH",
-                    "HHH",
-                    'H', new ItemStack(
-                            Matter.matter[i],1
-                    )
-            );
-        }
-        for (int i = 0; i< matters.length; i++){//分解配方
-            GameRegistry.addShapelessRecipe(
-                    new ItemStack(Matter.matter[i],9),
-                    new Object[]{
-                            new ItemStack(Item.getItemFromBlock(PrExBlocks.matters[i]),1)
-                    });
-        }
-        for (int i = 0; i< PrExBlocks.fuels.length; i++){//燃料块注册
-            GameRegistry.addRecipe(
-                    new ItemStack(
-                            Item.getItemFromBlock(PrExBlocks.fuels[i]),1
-                    ),
-                    "HHH",
-                    "HHH",
-                    "HHH",
-                    'H', new ItemStack(
-                            PrExItems.fule[i],1
-                    )
-            );
-        }
-        for (int i = 0; i< PrExBlocks.fuels.length; i++){//分解配方
-            GameRegistry.addShapelessRecipe(
-                    new ItemStack(PrExItems.fule[i],9),
-                    new Object[]{
-                            new ItemStack(Item.getItemFromBlock(PrExBlocks.fuels[i]),1)
-                    });
-        }
-        for(int i=0;i<PrExBlocks.ccollector.length; i++){
-            GameRegistry.addRecipe(
-                    new ItemStack(
-                            Item.getItemFromBlock(PrExBlocks.ccollector[i]),1
-                    ),
-                    "HHH",
-                    "HHH",
-                    "HHH",
-                    'H', new ItemStack(
-                            Item.getItemFromBlock(PrExBlocks.collector[i]),1
-                    )
-            );
-        }
-        for(int i=0;i<PrExBlocks.ccollector.length; i++){
-            GameRegistry.addShapelessRecipe(
-                    new ItemStack(
-                            Item.getItemFromBlock(PrExBlocks.collector[i]),9
-                    ),new Object[]{
-                            new ItemStack(Item.getItemFromBlock(PrExBlocks.ccollector[i]),1)
-                    }
-            );
-        }
-    }
     public static void fuel(){
         GameRegistry.addRecipe(
                 new ItemStack(
                         PrExItems.fule[0],1
                 ),
                 "HHH",
-                "Q  ",
+                "H  ",
                 "   ",
                 'H', new ItemStack(
                         ObjHandler.fuels, 1,2
-                ),
-                'Q',new ItemStack(ObjHandler.fuelBlock,1,2)
+                )
         );
         for(int i=1;i<PrExItems.fule.length;i++){
             GameRegistry.addRecipe(
                     new ItemStack(
-                           PrExItems.fule[i],1
+                            PrExItems.fule[i],1
                     ),
                     "HHH",
-                    "Q  ",
+                    "H  ",
                     "   ",
                     'H', new ItemStack(
                             PrExItems.fule[i-1], 1
-                    ),
-                    'Q',new  ItemStack(PrExBlocks.fuels[i-1], 1)
+                    )
             );
         }
     }
@@ -361,37 +267,25 @@ public class recipe {
                 new ItemStack(
                         Matter.matter[0],1
                 ),
-                "FQF",
-                "HMH",
-                "FQF",
+                "HHH",
+                "QQQ",
+                "HHH",
                 'H', new ItemStack(
                         ObjHandler.fuels, 1,2
                 ),
-                'F', new ItemStack(
-                       Item.getItemFromBlock(ObjHandler.fuelBlock) , 1,2
-                ),
-                'M', new ItemStack(
-                        Item.getItemFromBlock(ObjHandler.matterBlock) ,1,1
-                ),
                 'Q',new ItemStack(
                         ObjHandler.matter ,1,1
-        )
+                )
         );
         GameRegistry.addRecipe(
                 new ItemStack(
                         Matter.matter[0],1
                 ),
-                "FHF",
-                "QMQ",
-                "FHF",
+                "HHH",
+                "QQQ",
+                "HHH",
                 'H', new ItemStack(
                         ObjHandler.fuels, 1,2
-                ),
-                'F', new ItemStack(
-                        Item.getItemFromBlock(ObjHandler.fuelBlock) , 1,2
-                ),
-                'M', new ItemStack(
-                        Item.getItemFromBlock(ObjHandler.matterBlock) ,1,1
                 ),
                 'Q',new ItemStack(
                         ObjHandler.matter ,1,1
@@ -402,40 +296,28 @@ public class recipe {
                     new ItemStack(
                             Matter.matter[i],1
                     ),
-                    "FHF",
-                    "QMQ",
-                    "FHF",
+                    "HHH",
+                    "MMM",
+                    "HHH",
                     'H', new ItemStack(
                             PrExItems.fule[i-1], 1
                     ),
-                    'F',new ItemStack(
-                            Item.getItemFromBlock(PrExBlocks.fuels[i-1]) ,1
-                    ),
                     'M', new ItemStack(
                             Matter.matter[i-1],1
-                    ),
-                    'Q',new ItemStack(
-                            Item.getItemFromBlock(PrExBlocks.matters[i-1]) , 1
                     )
             );
             GameRegistry.addRecipe(
                     new ItemStack(
                             Matter.matter[i],1
                     ),
-                    "FQF",
-                    "HMH",
-                    "FQF",
+                    "HHH",
+                    "MMM",
+                    "HHH",
                     'H', new ItemStack(
                             PrExItems.fule[i-1], 1
                     ),
-                    'F',new ItemStack(
-                            Item.getItemFromBlock(PrExBlocks.fuels[i-1]) ,1
-                    ),
                     'M', new ItemStack(
                             Matter.matter[i-1],1
-                    ),
-                    'Q',new ItemStack(
-                            Item.getItemFromBlock(PrExBlocks.matters[i-1]) , 1
                     )
             );
         }
@@ -449,9 +331,7 @@ public class recipe {
                 "HQH",
                 "QWQ",
                 "HQH",
-                'H', new ItemStack(
-                        Item.getItemFromBlock(PrExBlocks.matters[3]), 1
-                ),
+                'H', new ItemStack(Matter.matter[3], 1),
                 'W',new ItemStack(Items.writable_book ,1),
                 'Q',new ItemStack(Items.nether_star , 1)
         );
@@ -459,73 +339,11 @@ public class recipe {
                 new ItemStack(
                         ObjHandler.tome,1
                 ),
+                "HHH",
                 "HAH",
-                "AQA",
-                "HAH",
+                "HHH",
                 'H', new ItemStack(PrExItems.KnowledgeShareBook, 1),
-                'Q',new ItemStack(PrExItems.finalStar , 1),
                 'A',new ItemStack(PrExItems.finalStarShard,1)
-        );
-    }
-    public static void SpeedUpdate(){
-        if (!ExampleMod.enableTimerMachine)return;
-        Block[] pww=new Block[]{PrExBlocks.matters[1],PrExBlocks.matters[3],PrExBlocks.matters[6],PrExBlocks.matters[9],PrExBlocks.matters[11]};
-        for(int i=1;i<5;i++){
-            GameRegistry.addRecipe(
-                    new ItemStack(
-                            Item.getItemFromBlock(PrExBlocks.speedupdate[i]),1
-                    ),
-                    "HAH",
-                    "AQA",
-                    "HAH",
-                    'Q',new ItemStack(Item.getItemFromBlock(PrExBlocks.speedupdate[i-1]) , 1),
-                    'A',new ItemStack(Item.getItemFromBlock(pww[i-1]),1),
-                    'H',new ItemStack(ObjHandler.timeWatch,1)
-            );
-        }
-        GameRegistry.addRecipe(
-                new ItemStack(
-                        Item.getItemFromBlock(PrExBlocks.speedupdate[0]),1
-                ),
-                " A ",
-                "AQA",
-                " A ",
-                'Q',new ItemStack(ObjHandler.timeWatch , 1),
-                'A',new ItemStack(Item.getItemFromBlock(ObjHandler.matterBlock),1,1)
-        );
-        GameRegistry.addRecipe(
-                new ItemStack(
-                        Item.getItemFromBlock(PrExBlocks.speedupdate[5]),1
-                ),
-                "HDH",
-                "AQA",
-                "HDH",
-                'Q',new ItemStack(Item.getItemFromBlock(PrExBlocks.speedupdate[4]) , 1),
-                'A',new ItemStack(PrExItems.finalStarShard,1),
-                'D',new ItemStack(Item.getItemFromBlock(PrExBlocks.matters[11])),
-                'H',new ItemStack(ObjHandler.timeWatch,1)
-        );
-        for(int i=1;i<6;i++){
-            GameRegistry.addRecipe(
-                    new ItemStack(
-                            Item.getItemFromBlock(PrExBlocks.speedpowerflower[i]),1
-                    ),
-                    " A ",
-                    "AQA",
-                    " A ",
-                    'Q',new ItemStack(Item.getItemFromBlock(PrExBlocks.speedupdate[i]) , 1),
-                    'A',new ItemStack(Item.getItemFromBlock(pww[i-1]),1)
-            );
-        }
-        GameRegistry.addRecipe(
-                new ItemStack(
-                        Item.getItemFromBlock(PrExBlocks.speedpowerflower[0]),1
-                ),
-                " A ",
-                "AQA",
-                " A ",
-                'Q',new ItemStack(Item.getItemFromBlock(PrExBlocks.speedupdate[0]) , 1),
-                'A',new ItemStack(Item.getItemFromBlock(ObjHandler.matterBlock),1,1)
         );
     }
 }

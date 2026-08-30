@@ -42,6 +42,11 @@ public class PRP implements ILateMixinLoader {
                 "tbb",
                 "Te").collect(Collectors.toList());
         if (Loader.isModLoaded("betterbuilderswands")) mixins.add("builder_wands");//兼容性修改
+        if (Loader.isModLoaded("equivalentenergistics")) {
+            mixins.add("EmcCondenserBase");
+            mixins.add("EMCCraftingPatternMixin");
+            mixins.add("ProjectEMixin");
+        }//兼容应用能源
         return mixins;
     }
 }

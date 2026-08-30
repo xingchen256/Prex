@@ -1,5 +1,6 @@
 package com.prex.prexmod.block;
 
+import com.prex.prexmod.ExampleMod;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -28,14 +29,16 @@ public class PrExBlocks {
                     "prex_relay_mk" + (i + 1)
             );
         }
-        for(int i=0;i<6;i++){
-            speedupdate[i]=new SpeedUpdateBlock(i+1);
-            GameRegistry.registerBlock(
-                    speedupdate[i],SpeedUpdateItem.class,"prex_speed_update_block_mk" + (i+1));
-            speedpowerflower[i]=new SpeedUpdatePowerFlower(i+1);
-            GameRegistry.registerBlock(
-                    speedpowerflower[i], SpeedUpdatePowerFlowerItem.class,"prex_speed_power_flower_mk" + (i+1)
-            );
+        if (ExampleMod.enableTimerMachine){
+            for(int i=0;i<6;i++){
+                speedupdate[i]=new SpeedUpdateBlock(i+1);
+                GameRegistry.registerBlock(
+                        speedupdate[i],SpeedUpdateItem.class,"prex_speed_update_block_mk" + (i+1));
+                speedpowerflower[i]=new SpeedUpdatePowerFlower(i+1);
+                GameRegistry.registerBlock(
+                        speedpowerflower[i], SpeedUpdatePowerFlowerItem.class,"prex_speed_power_flower_mk" + (i+1)
+                );
+            }
         }
         for(int i = 0; i < 16; i++)
         {

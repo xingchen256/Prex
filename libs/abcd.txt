@@ -2,3 +2,7 @@
 SHA256：a9000e69ca7756cfc5b32cfb95040fffd5a146037b4269569837db84a021d5f9
 BetterBuildersWands-0.8.1-1.7.10r92+aec06c3.jar(更好的建筑之杖)
 SHA256: 3451a1ffc42159e87ba4f15bdc6aeafb336ebb40f5c40f5a839ac9e4378218bc
+Waila-1.5.10_1.7.10.jar(高亮显示,非GTHN)
+EquivalentEnergistics-1.7.10-0.8.3.jar(应用能源学,不论GTHN版本还是普通版)
+及其依赖不论是GTNH版还是普通版AE,如果使用GTNH请使用Dev版
+以上jar默认非dev版本
