@@ -1,6 +1,6 @@
 # PrEx MOD 等价交换扩展 1.7.10 移植版(Minecraft Project Expansion1.7.10)
 # 重要
-- 当前存在另一个移植版,对物品功能的移植更完善
+- 当前存在另一个移植版,对物品功能的移植更完善,~~但兼容还有待更新~~
   https://github.com/YatzCore/FTB-ProjectEX-1.7.10/tree/main/src/main/java/com/latmod/mods/projectex,
 ## 📦 食用方法
 

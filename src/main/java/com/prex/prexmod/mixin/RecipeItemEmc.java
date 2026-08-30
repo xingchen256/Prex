@@ -2,6 +2,7 @@ package com.prex.prexmod.mixin;
 
 import com.prex.prexmod.emc.PrEmcMap;
 import com.prex.prexmod.emc.PrEmcMapV;
+import com.prex.prexmod.emc.PrExEmcMapFile;
 import moze_intel.projecte.emc.NormalizedSimpleStack;
 import moze_intel.projecte.emc.SimpleGraphMapper;
 import moze_intel.projecte.emc.SimpleStack;
@@ -47,7 +48,8 @@ public  class RecipeItemEmc{
                 throw new RuntimeException(e);
             }
             NormalizedSimpleStack.NSSItem stack = (NormalizedSimpleStack.NSSItem) output;
-            PrEmcMap.put(new SimpleStack(new ItemStack((Item)Item.itemRegistry.getObject(stack.itemName),1,stack.damage)),result );
+            if(!PrExEmcMapFile.PrExEmcMap.containsKey(stack.itemName))//这个等价在重设价格后会重计算然后.....
+                PrEmcMap.put(new SimpleStack(new ItemStack((Item)Item.itemRegistry.getObject(stack.itemName),1,stack.damage)),result );
 //            FMLLog.info(stack.itemName+String.format(": %s",result));
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
