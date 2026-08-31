@@ -1,7 +1,5 @@
 # PrEx MOD 等价交换扩展 1.7.10 移植版(Minecraft Project Expansion1.7.10)
-# 重要
-- 当前存在另一个移植版,对物品功能的移植更完善,~~但兼容还有待更新~~
-  https://github.com/YatzCore/FTB-ProjectEX-1.7.10/tree/main/src/main/java/com/latmod/mods/projectex,
+
 ## 📦 食用方法
 
 1. **构建**：将 Build 出的 JAR 文件放入 `mods` 文件夹。
@@ -114,6 +112,8 @@
 - 新增更高级的“能量之星”等级。
 - 时间立场加速器(开销巨大)与力量花盆加速器(开销友好)
 ---
+- 当前存在另一个移植版,对物品功能的移植更完善,
+  https://github.com/YatzCore/FTB-ProjectEX-1.7.10/tree/main/src/main/java/com/latmod/mods/projectex,
 (以下是一堆废话,普通玩家不必看)
 ## 🛠️ 实现方案（开发者向）
 

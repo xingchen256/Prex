@@ -1,19 +1,18 @@
 package com.prex.prexmod.emc;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import moze_intel.projecte.PECore;
 import moze_intel.projecte.emc.SimpleStack;
-import moze_intel.projecte.utils.FileHelper;
 import moze_intel.projecte.utils.ItemHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.math.BigInteger;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
@@ -24,26 +23,35 @@ public class PrExEmcMapFile {
             .create();
     private static final File PrExFile=new File(PECore.CONFIG_DIR, "PrExEmcMap.cfg");
     private static final Type MAP_TYPE = new TypeToken<Map<String, String[]>>() {}.getType();
-    public static Map<SimpleStack ,String> PrExEmcMap;//格式:"ItemName":[meta,Emc](String)
-    private class FuckItem{
+    public static Map<FuckItem ,String> PrExEmcMap;//格式:"ItemName":[meta,Emc](String)
+    private static class FuckItem{//f**k item meta,f**k function
         public String Uname;
         public int meta;
         public FuckItem(String name, int meta){
             this.Uname=name;
             this.meta=meta;
         }
+        public FuckItem(ItemStack itemStack){
+            this.Uname=Item.itemRegistry.getNameForObject(itemStack.getItem());
+            this.meta=itemStack.getItemDamage();
+        }
+        public SimpleStack toStack(){
+            SimpleStack t=new SimpleStack(ItemHelper.getStackFromString(this.Uname,this.meta)).copy();
+            t.qnty=1;
+            return t;
+        }
     }
-    public static boolean addToFile(String name, int meta, BigInteger emc){
-        PrExEmcMap.put(new SimpleStack(ItemHelper.getStackFromString(name,meta)),emc.toString());
-        return writeFile();
+    public static void addToFile(String name, int meta, BigInteger emc){
+        PrExEmcMap.put(new FuckItem(name,meta),emc.toString());
+        writeFile();
     }
     public static boolean containsKey(String name, int meta){
-        return PrExEmcMap.containsKey(new SimpleStack(ItemHelper.getStackFromString(name,meta)));
+        return PrExEmcMap.containsKey(new FuckItem(name,meta));
     }
     public static void removeFromFile(String name,int meta){
         ItemStack pt=ItemHelper.getStackFromString(name,meta);
         PrEmcMap.remove(pt);//清除内存中的PrEmcMap
-        PrExEmcMap.remove(new SimpleStack(pt));//清理文件,与缓存
+        PrExEmcMap.remove(new FuckItem(name,meta));//清理文件,与缓存
         writeFile();
     }
     public static boolean containsKey(ItemStack item){
@@ -51,61 +59,48 @@ public class PrExEmcMapFile {
     }
 
     public static String getEMC(String name,int meta){
-        return PrExEmcMap.get(new SimpleStack(ItemHelper.getStackFromString(name,meta)));
+        return PrExEmcMap.get(new FuckItem(name,meta));
     }
     public static String getEMC(ItemStack item){
-        return PrExEmcMap.get(new SimpleStack(item));
+        return PrExEmcMap.get(new FuckItem(item));
     }
-    public static boolean readFile() {//读取文件
-        if (!PrExFile.exists() || !PrExFile.isFile()) {
-            PrExEmcMap = new HashMap<>();
-            return false;
+    public static void readFile() {//读取文件
+        PrExEmcMap = new HashMap<>();
+        if (!PrExFile.exists()) {
+            // 文件不存在，创建一个空数组文件
+            writeFile(); // 此时 PrExEmcMap 为空，会写入 []
+            return;
         }
-        boolean flag = true;
-        Reader reader = null;
         try {
-            PrExEmcMap.clear();
-            reader = new InputStreamReader(Files.newInputStream(PrExFile.toPath()), StandardCharsets.UTF_8);
-            Map<String, String[]> map = GSON.fromJson(reader, MAP_TYPE);
-            for (String i:map.keySet()) {
-                ItemStack pt=ItemHelper.getStackFromString(i,Integer.parseInt(map.get(i)[0]));
-                PrExEmcMap.put(new SimpleStack(pt),map.get(i)[1]);
-                //写入到PrEmcMap中原版等价会挂名一个int_max的值
-                PrEmcMap.put(pt,new BigInteger(map.get(i)[1]));
-                if(map.get(i).equals("0"))PrEmcMap.remove(pt);
-
+            String content = new String(Files.readAllBytes(PrExFile.toPath()));
+            JsonArray array = new JsonParser().parse(content).getAsJsonArray();
+            for (int i = 0; i < array.size(); i++) {
+                JsonObject obj = array.get(i).getAsJsonObject();
+                String name = obj.get("name").getAsString();
+                int meta = obj.get("meta").getAsInt();
+                String emc = obj.get("Emc").getAsString();
+                FuckItem item = new FuckItem(name,meta);
+                PrExEmcMap.put(item, emc);
+                PrEmcMap.put(item.toStack(),new BigInteger(emc));
             }
-        } catch (Exception e) {
-            PrExEmcMap=new HashMap<>();
-            flag=false;
-        }finally {
-            if(reader!=null){
-                FileHelper.closeStream(reader);
-            }else{
-                flag=false;
-            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return flag;
     }
-    public static boolean writeFile() {//写入文件
-        if (PrExEmcMap == null) return false;
-        boolean flag=true;
-        Writer writer = null;
-        try  {
-            writer= new OutputStreamWriter(Files.newOutputStream(PrExFile.toPath()), StandardCharsets.UTF_8);
-            Map<String,String[]> qtw=new HashMap<>();
-            for (ItemStack i:PrExEmcMap.keySet()) {
-                qtw.put(Item.itemRegistry.getNameForObject(i.getItem()),new String[]{String.valueOf(i.getItemDamage()),PrExEmcMap.get(i)});
-            }
-            GSON.toJson(qtw, writer);
-        }catch (Exception e) {
-            flag = false;
+    public static void writeFile() {//写入文件
+        JsonArray array = new JsonArray();
+        for (Map.Entry<FuckItem, String> entry : PrExEmcMap.entrySet()) {
+            JsonObject obj = new JsonObject();
+            obj.addProperty("name", entry.getKey().Uname);
+            obj.addProperty("meta", entry.getKey().meta);
+            obj.addProperty("Emc", entry.getValue());
+            array.add(obj);
         }
-        finally {
-            if (writer!=null){
-            FileHelper.closeStream(writer);}
-            else{flag=false;}
+        try (FileWriter writer = new FileWriter(PrExFile)) {
+            GSON.toJson(array, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        return flag;
     }
+    
 }
