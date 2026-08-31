@@ -112,7 +112,7 @@
 - 新增更高级的“能量之星”等级。
 - 时间立场加速器(开销巨大)与力量花盆加速器(开销友好)
 ---
-- 当前存在另一个移植版,对物品功能的移植更完善,
+- 当前存在另一个基于ASM修改上限的移植版,对物品功能的移植更完善,
   https://github.com/YatzCore/FTB-ProjectEX-1.7.10/tree/main/src/main/java/com/latmod/mods/projectex,
 (以下是一堆废话,普通玩家不必看)
 ## 🛠️ 实现方案（开发者向）

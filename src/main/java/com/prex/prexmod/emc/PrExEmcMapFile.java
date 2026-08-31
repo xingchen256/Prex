@@ -40,6 +40,21 @@ public class PrExEmcMapFile {
             t.qnty=1;
             return t;
         }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (obj instanceof FuckItem){
+                FuckItem a=(FuckItem) obj;
+                return a.Uname.equals(this.Uname) && a.meta == this.meta;
+            }
+            return false;
+        }
+        @Override
+        public int hashCode() {
+            int result = Uname.hashCode();
+            result = 31 * result + meta;
+            return result;
+        }
     }
     public static void addToFile(String name, int meta, BigInteger emc){
         PrExEmcMap.put(new FuckItem(name,meta),emc.toString());

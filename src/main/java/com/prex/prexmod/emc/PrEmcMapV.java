@@ -35,6 +35,12 @@ public class PrEmcMapV {
                     (Map<?, Integer>) ingredientField.get(conversion);
 
 
+            Field outnumberField =
+                    conversion.getClass().getDeclaredField("outnumber");
+
+            outnumberField.setAccessible(true);
+
+            int outnumber = outnumberField.getInt(conversion);//输出数
             boolean allIngredientsAreFree = true;
             boolean hasPositiveIngredientValues = false;
 
@@ -86,23 +92,14 @@ public class PrEmcMapV {
                 }
             }
 
-
-            /*
-             * 对应原版:
-             *
-             * if(allIngredientsAreFree ||
-             *    (hasPositiveIngredientValues && value <= 0))
-             *      return free
-             */
-
             if (allIngredientsAreFree
                     || (hasPositiveIngredientValues
-                    && value.compareTo(BigInteger.ZERO)<=0)) {
+                    && value.compareTo(BigInteger.ZERO)<=0) || outnumber <= 0) {
                 return BigInteger.ZERO;
             }
 
 
-            return value;
+            return value.divide(BigInteger.valueOf(outnumber));
 
 
         } catch (Exception e) {
