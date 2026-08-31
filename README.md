@@ -1,6 +1,6 @@
 # PrEx MOD Equivalent Exchange Expansion 1.7.10 Port (Minecraft Project Expansion 1.7.10)
 
-中文提供[https://github.com/xingchen256/Prex/blob/master/src/zh_cn.md](中文)
+中文提供[中文](./src/zh_cn.md)
 ## Usage
 
 1. **Build**: Place the generated JAR file into the `mods` folder.
