@@ -20,8 +20,21 @@ import java.math.BigInteger;
 import java.util.Map;
 
 @Mixin(value = SimpleGraphMapper.class,remap = false)
-public  class RecipeItemEmc{
+public abstract class RecipeItemEmc{
+    @Inject(method = "valueForConversion",at= @At(value = "RETURN",ordinal = 0),cancellable = true,remap = false)
+    public void twee(Map values,
+                     @Coerce Object conversion,
+                     CallbackInfoReturnable cir){
+        Object value = cir.getReturnValue();
+        int t=((Fraction)value).getNumerator();
+        if(t==2147483647||t==1073741823||t==715827882||
+        t==536870911|| t==429496729||
+        t==357913941|| t==306783378||
+        t==268435455|| t==238609294){//特殊值,意味着出现了int上限问题
+            tw(values,conversion);
+        }
 
+    }
     @Inject(
             method = "valueForConversion",
             at = @At(value = "INVOKE",
@@ -29,14 +42,14 @@ public  class RecipeItemEmc{
                     ordinal = 0),
             cancellable = true
     )
-    public void tw(       Map values,
-                           @Coerce Object conversion,
-                           CallbackInfoReturnable cir){
+    public void tww(Map values,@Coerce Object conversion,CallbackInfoReturnable cir){
+        cir.setReturnValue(tw(values,conversion));
+    }
+    public Fraction tw(Map values, @Coerce Object conversion){
         BigInteger result =
                 PrEmcMapV.valueForConversion(values,conversion);
         if(result.compareTo(BigInteger.ZERO)==0){
-            cir.setReturnValue(Fraction.getFraction(0,1));
-            return;
+            return Fraction.getFraction(0,1);
         }
         try {
             Field outputField =  conversion.getClass().getDeclaredField("output");
@@ -48,16 +61,13 @@ public  class RecipeItemEmc{
                 throw new RuntimeException(e);
             }
             NormalizedSimpleStack.NSSItem stack = (NormalizedSimpleStack.NSSItem) output;
-            if(!PrExEmcMapFile.PrExEmcMap.containsKey(stack.itemName))//这个等价在重设价格后会重计算然后.....
+            if(!PrExEmcMapFile.containsKey(stack.itemName,stack.damage))//这个等价在重设价格后会重计算然后.....
                 PrEmcMap.put(new SimpleStack(new ItemStack((Item)Item.itemRegistry.getObject(stack.itemName),1,stack.damage)),result );
-//            FMLLog.info(stack.itemName+String.format(": %s",result));
         } catch (NoSuchFieldException e) {
             throw new RuntimeException(e);
         }
 //        FMLLog.warning("FQWW Conversion result: "+ conversion +result);
-        cir.setReturnValue(Fraction.getFraction(Integer.MAX_VALUE,1));
+        return Fraction.getFraction(Integer.MAX_VALUE,1);
 
     }
-
-
 }

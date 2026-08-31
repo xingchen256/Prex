@@ -1,6 +1,8 @@
 package com.prex.prexmod;
 
 import com.prex.prexmod.emc.NetworkHandler;
+import com.prex.prexmod.emc.PrEmcMap;
+import com.prex.prexmod.emc.PrEmcMapS;
 import com.prex.prexmod.emc.remcs;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.PlayerEvent;
@@ -49,6 +51,10 @@ public class QWQ {
         EntityPlayer player = event.player;
         setRemcs(player,BigInteger.ZERO);
         sync(player);
+        NetworkHandler.REmcMap.sendTo(
+                new PrEmcMapS(PrEmcMap.gets()),
+                (EntityPlayerMP) player
+        );
     }
 }
 

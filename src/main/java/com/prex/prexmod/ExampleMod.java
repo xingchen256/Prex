@@ -4,6 +4,7 @@ package com.prex.prexmod;
 //import com.prex.prexmod.emc.playerData;
 
 import com.prex.prexmod.block.*;
+import com.prex.prexmod.emc.EMCCmd;
 import com.prex.prexmod.emc.NetworkHandler;
 import com.prex.prexmod.emc.PrExEmcMapFile;
 import com.prex.prexmod.item.PrExItems;
@@ -125,7 +126,7 @@ public class ExampleMod {
         );
         NetworkHandler.init();
         FMLCommonHandler.instance().bus().register(new powerFlowerEven());
-
+        PrExEmcMapFile.readFile();//加载Emc
 //        PrEmcMap.put(new SimpleStack(new ItemStack(Item.getItemFromBlock(PrExBlocks.matters[11]))),new BigInteger("41000047483647"));
     }
 
@@ -163,5 +164,6 @@ public class ExampleMod {
 
     @Mod.EventHandler
     public void onServerStartingEvent(FMLServerStartingEvent event) {
+        event.registerServerCommand(new EMCCmd());
     }
 }

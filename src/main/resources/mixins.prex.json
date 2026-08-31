@@ -7,7 +7,6 @@
   "mixins": [
     "builder_wands",
     "Conderser",
-    "EmcCMD",
     "EmcCondenserBase",
     "EMCCraftingPatternMixin",
     "EmcParser",
@@ -27,7 +26,6 @@
     "ProjectGUI",
     "ProjectMaxEMC",
     "RecipeItemEmc",
-    "RemoveEmc",
     "tbb",
     "Te"
   ]

@@ -11,6 +11,7 @@ public class PrEmcMapSync implements IMessageHandler<PrEmcMapS, IMessage> {
         Minecraft.getMinecraft().func_152344_a(new Runnable() {
             @Override
             public void run() {
+                PrEmcMap.clear();
                 PrEmcMap.setEmc(message.emc);
             }
         });

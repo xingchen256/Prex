@@ -3,7 +3,6 @@ package com.prex.prexmod.emc;
 import moze_intel.projecte.emc.SimpleStack;
 import moze_intel.projecte.utils.EMCHelper;
 import moze_intel.projecte.utils.ItemHelper;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import java.math.BigInteger;
@@ -16,6 +15,9 @@ public class PrEmcMap {
     public static void setEmc(Map<SimpleStack, BigInteger> aemc){
         emc=aemc;
     }
+    public static void clear(){
+        emc=new HashMap<>();
+    }
     public static Map<SimpleStack, BigInteger> gets(){return emc;}
     public static void put(SimpleStack simpleStack, BigInteger bigInteger){
         emc.put(simpleStack,bigInteger);
@@ -24,8 +26,8 @@ public class PrEmcMap {
         SimpleStack copy=new SimpleStack(key);
         put(copy,bigInteger);
     }
-    public static void remove(String  key,int meta) {
-        emc.remove(new SimpleStack(ItemHelper.getStackFromString(key,meta)));
+    public static void remove(ItemStack a) {
+        emc.remove(new SimpleStack(a));
     }
     public static boolean contains(String key,int meta) {
         SimpleStack copy=new SimpleStack(ItemHelper.getStackFromString(key,meta));
@@ -47,9 +49,9 @@ public class PrEmcMap {
     public static BigInteger get(SimpleStack stack) {
         SimpleStack copy = stack.copy();
         copy.qnty = 1;
-        String name=Item.getItemById(copy.id).getUnlocalizedName();
-        if(PrExEmcMapFile.PrExEmcMap.containsKey(name)){
-            return new BigInteger(PrExEmcMapFile.PrExEmcMap.get(name)[1]);
+        ItemStack q=stack.toItemStack();
+        if(PrExEmcMapFile.containsKey(q)){
+            return new BigInteger(PrExEmcMapFile.getEMC(q));
         }
         return emc.get(copy);
     }
