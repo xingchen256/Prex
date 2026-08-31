@@ -25,6 +25,7 @@ public class PRP implements ILateMixinLoader {
     public List<String> getMixins(Set<String> loadedMods) {
         List<String> mixins = Stream.of(
                 "Conderser",
+                "EmcReload",
                 "FuelMap",
                 "ItemConsume",
                 "ItemEMCH",
@@ -34,7 +35,6 @@ public class PRP implements ILateMixinLoader {
                 "ItemInput",
                 "ItemLock",
                 "ItemTips",
-                "EmcReload",
                 "playerget",
                 "ProjectEEMCMixin",
                 "ProjectGUI",
@@ -47,6 +47,7 @@ public class PRP implements ILateMixinLoader {
             mixins.add("EmcCondenserBase");
             mixins.add("EMCCraftingPatternMixin");
             mixins.add("ProjectEMixin");
+            mixins.add("AddEmcCellMixin");
         }//兼容应用能源
         return mixins;
     }

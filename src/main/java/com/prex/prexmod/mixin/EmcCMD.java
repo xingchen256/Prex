@@ -4,14 +4,12 @@ import com.prex.prexmod.emc.NetworkHandler;
 import com.prex.prexmod.emc.PrEmcMap;
 import com.prex.prexmod.emc.PrEmcMapS;
 import com.prex.prexmod.emc.PrExEmcMapFile;
-import moze_intel.projecte.config.CustomEMCParser;
 import moze_intel.projecte.network.commands.ReloadEmcCMD;
 import net.minecraft.command.ICommandSender;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /*思路修改parseInteger部分，将超过上限的设为1,
 然后在写入文件时再次判断是否超过Int上限,如果超过上限就写入PrexMap中，其余部分正常进行不修改*/
@@ -75,22 +73,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 //        return CustomEMCParser.addToFile(name, meta, 0);
 //    }
 //}
-@Mixin(CustomEMCParser.class)
-class EmcParser{
-//    @Inject(method = "readUserData",at= @At(
-//            value = "INVOKE",
-//            target = "Ljava/util/Map;clear()V"),
-//    remap = false)
-//    private static void readUserData(CallbackInfo ci){
-//        PrExEmcMapFile.readFile();
-//    }
-    @Inject(method = "removeFromFile",at= @At(value = "INVOKE",
-            target = "Lmoze_intel/projecte/utils/FileHelper;closeStream(Ljava/io/Closeable;)V"),
-    remap = false)
-    private static void removeFromFile(String name, int meta, CallbackInfoReturnable<Boolean> cir){
-        PrExEmcMapFile.removeFromFile(name,meta);
-    }
-}
 @Mixin(ReloadEmcCMD.class)
 class EmcReload{
     @Inject(method = "func_71515_b",at= @At(value = "INVOKE",
