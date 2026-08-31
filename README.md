@@ -1,155 +1,157 @@
-# PrEx MOD 等价交换扩展 1.7.10 移植版(Minecraft Project Expansion1.7.10)
+# PrEx MOD Equivalent Exchange Expansion 1.7.10 Port (Minecraft Project Expansion 1.7.10)
 
-## 食用方法
+中文提供[./src/zh_cn.md]()
+## Usage
 
-1. **构建**：将 Build 出的 JAR 文件放入 `mods` 文件夹。
-2. **修改配置**：打开 JAR 文件中的 `META-INF` 文件夹，找到对应文件并删除以下行：
+1. **Build**: Place the generated JAR file into the `mods` folder.
+2. **Modify the configuration**: Open the `META-INF` folder in the JAR file, locate the corresponding file, and delete the following line:
    `MixinConfigs: mixins.prex.json`
 ---
 
-## ⚠️ 注意事项
-- **如果您是自行构建jar,请打开libs中的abcd下载对应mod**
-- **总 EMC 上限**：如果EMC超过 `10^308`可能会导致EMC无法正常显示等问题。
-- **配方**: 如果您不喜欢新的配方可以再prex.cfg文件中将enableRecipe设为false
-#### **炼金术箱可能出现显示异常**：
-1. 转化时进度条和总 EMC 可能显示异常。 
-2. 当炼金术箱总 EMC 超过 `10^40` 时，数值将不再增加。
-#### **EMC 卡上限问题**：
-- 若添加其他等价交换扩展，涉及 EMC 超过 `2^31-1` 的物品可能导致卡上限。
-- **建议**：尽量不要将 EMC 超上限的物品用于除等价交换原版物品以外的任何物品。
-- **如果加载后移除本mod会导致超出上限EMC清 0**
-### **兼容性问题**:
-- 不出意外除了特点兼容的等价附属mod,其它mod应该都无法正常加载,或出现异常,原因在实现方案处会提到 
-#### 提供兼容的mod:
-- 等价能源学(请不要使总输出物品的EMC超过10^308,包括GTNH版本,依赖任使用本mod的依赖),已实现View EMC,PEEX,Tome of Knowledge Sharing,PEAA的全部功能
+## ⚠️ Precautions
+- **If you are building the JAR file yourself, please open the abcd file in the libs directory to download the corresponding mod**
+- **Total EMC upper limit**: If the EMC exceeds `10^308`, it may lead to issues such as the EMC not displaying properly.
+- **Recipe**: If you don't like the new recipe, you can set enableRecipe to false in the prex.cfg file
+#### **Possible display anomalies in the Alchemy Chest**:
+1. The progress bar and total EMC may display abnormally during the conversion process.
+2. When the total EMC of the alchemy chest exceeds `10^40`, the value will no longer increase.
+#### **EMC card upper limit issue**:
+- If other equivalent exchange extensions are added, items involving EMC exceeding `2^31-1` may lead to a card cap.
+- **Recommendation**: Try not to use items with EMC exceeding the upper limit for any purpose other than exchanging them for equivalent original items.
+- **Removing this mod after loading will result in exceeding the maximum EMC and resetting it to 0**
+### **Compatibility issues**:
+- Barring any unexpected issues, except for equivalent auxiliary mods that are compatible with the features, other mods should not be able to load normally or may encounter exceptions. The reasons for this will be mentioned in the implementation plan
+#### Provide compatible mods:
+- Equivalent Energy Science (please ensure the total EMC of output items does not exceed 10^308, including the GTNH version, and any dependencies of this mod), has implemented all functions of View EMC, PEEX, Tome of Knowledge Sharing, and PEAA
 ---
 
-## 物品与方块速率公式
+## Item and Block Rate Formula
 
-### 力量花盆（输出速率）
-- 会给放置它的玩家每秒提供一定的EMC,如果玩家下线会累积EMC当玩家重新上线一次性给予玩家期间产生的EMC(如果服务器关闭或区块不加载不会保存进度),其EMC存储上限为`107,374,182x自身的生产效率`,超过不再生产EMC
+### Power Flowerpot (Output Rate)
+- It will provide a certain amount of EMC per second to the player who places it. If the player goes offline, EMC will accumulate. When the player comes back online, the accumulated EMC will be given to the player all at once (if the server is shut down or the chunks are not loaded, the progress will not be saved). Its EMC storage limit is `107,374,182x its own production efficiency`, and it will no longer produce EMC once exceeded
 - **mk > 3**：
 - 6144 × (4^(mk-4)) × 10 EMC/s
-- 配方:这级致密能量收集器A,这级继电器B,这级EMC接口C
-- 第一行:ACA
-- 第二行:BBB  =>这级力量花盆
-- 第三行:BBB
-### 能量收集器
-- 同原版
+- Recipe: This level of compact energy harvester A, this level of relay B, this level of EMC interface C
+- First line: ACA
+- Second line: BBB => This level of strength is represented by a flowerpot
+- Third line: BBB
+### Energy harvester
+- Same as the original version
 - **mk > 3**：
-- **最大输出效率**：`2^(mk+4) × 10` EMC/s
-- **储能上限**：`2^(mk-3) × 100000`
-- 配方上级能量收集器+这级能量=>这级收集器
-### 致密能量收集器
-- **仅合成用途,方块本身无功能**
-- 配方:这级能量收集器*9=>这级致密能量收集器
-### 继电器
-- 同原版
+- **Maximum output efficiency**: `2^(mk+4) × 10` EMC/s
+- **Energy storage upper limit**: `2^(mk-3) × 100000`
+- Recipe: Upper-level Energy Collector + This Level of Energy => This Level of Collector
+### Compact energy harvester
+- **For synthesis purposes only, the block itself has no functionality**
+- Recipe: 9 x this level of energy collector => this level of compact energy collector
+### Relay
+- Same as the original version
 - **mk > 3**：
-- **输出上限**：`64 × (mk+1)^2`
-- **储能上限**：`(mk-2)^2 × 1000_0000`
-- 配方:上级继电器+这级物质块=>这级继电器
-### EMC接口
-- **方块功能未制作,目前仅做合成用途**
-- 配方:低级共价粉A中级共价粉B,高级共价粉C,本级物质块D,上级EMC接口E
-- 第一行 ABC
-- 第二行 DED
-- 第三行 CBA
-### 时间立场加速器
-- **方块的功能相当于时间洪流怀表的加强版,可以加速方块工作、植物生长和随机刻加速**
-- 该方块只有6个等级,且性能开销巨大,不推荐堆叠使用.`如果在服务器中用终极时间立场加速器填满一个区块会有彩蛋qwq`
-- 会以自身为中心加速16x8x16(红物质是8x4x8)范围的方块运行和随机刻的运行
-### 力量花盆加速器
-- **相当于简化版的时间立场加速器,只能加速力量花盆的工作但是加速倍率极高**
-- 该方块同样只有6个等级,但性能开销极小,优化较好,但也不要过量堆叠
-- 会增加以自身为中心16x8x16(红物质是8x4x8)范围的力量花盆的EMC生能
-`不要试图再使用时间立场器加速力量花盆加速器,该方块具体原理见下文`
-### 燃料配方
-- 上级燃料*3+上级燃料块*1=>这级燃料
-- 上级燃料H,上级燃料块Y 
-- 第一行 HHH
-- 第二行 Y
-### 物质配方
-- 上级燃料块H,上级燃料Y,上级物质A,上级物质块B
-- 第一行 HYH 一一 HBH
-- 第二行 BAB 或者 YAY
-- 第三行 HYH 一一 HBH
-### 能量之心
-- 上级能量之心*4=>这级能量之心
-### 终极之心碎片
-- 仅合成用途
-- 配方:六级终末能量之心A,渐消失物质花盆B,渐消失物质块C,下界之心D
-- 第一行 ABA
-- 第二行 CDC
-- 第三行 ABA
-### 终极之心
-- 可以放在右边转化桌中心来获取200兆EMC每次
-- 可以放在左边转化桌清空你的EMC
-- 但并没有移植复制功能
-- 配方:最终能量花盆A,最终之心碎片B,龙蛋C
-- 第一行 ABA
-- 第二行 BCB
-- 第三行 ABA
-### 知识共享之书
-- Shift+右键书写知识,但是已经书写过知识的无法再次书写,书会变为附魔状态
-- 右键 读取里面的知识
-- 配方:紫罗兰物质块A,下界之心B,书与笔C
-- 第一行 ABA
-- 第二行 BCB
-- 第三行 ABA
-### 炼金术密卷
-- 有配方可生存获取，但需要亿点点代价 也就~~23.84 亿兆 EMC（23,846,627,553,001,305,725,781,076 EMC约 23.84 × 10^24）~~。
-- 配方:知识共享之书A,终极之心碎片B,终极之心C
-- 第一行 ABA
-- 第二行 BCB
-- 第三行 ABA
+- **Output upper limit**: `64 × (mk+1)^2`
+- **Energy storage upper limit**: `(mk-2)^2 × 1000_0000`
+- Recipe: Superior Relay + This Level of Matter Block => This Level of Relay
+### EMC Interface
+- **The block function has not been developed yet, and it is currently only used for synthesis purposes**
+- Recipe: Low-grade covalent powder A, intermediate covalent powder B, high-grade covalent powder C, substance block of this level D, superior EMC interface E
+- First line: ABC
+- Second line DED
+- Third row: CBA
+### Time Position Accelerator
+- **The function of the cube is equivalent to an enhanced version of the Time Vortex Pocket Watch, which can accelerate cube operations, plant growth, and random ticks**
+- This block has only 6 levels and comes with a significant performance cost, so stacking is not recommended. If you fill a block with ultimate time stance accelerators in a server, a special Easter egg will appear
+- It will accelerate the movement of blocks within a range of 16x8x16 (Enderite is 8x4x8) centered around itself, as well as the operation of random ticks
+### Power Flowerpot Accelerator
+- **Equivalent to a simplified version of a time stance accelerator, it can only accelerate the work of the power flowerpot, but with an extremely high acceleration rate**
+- This block also has only 6 levels, but it has minimal performance overhead and is well optimized. However, do not stack it excessively
+- It will increase the EMC (Energy Modification Capacity) of the flowerpot, which has a self-centered range of 16x8x16 (where red matter has a range of 8x4x8)
+  "Do not attempt to use the Time Standing Device to accelerate the Power Flower Pot Accelerator. The specific principle of this block is explained below."
+### Fuel formula
+- Superior fuel * 3 + superior fuel block * 1 => this level of fuel
+- Superior fuel H, superior fuel block Y
+- The first line is HHH
+- Second row Y
+### Material Recipe
+- Superior fuel block H, superior fuel Y, superior substance A, superior substance block B
+- The first line is "HYH" followed by "HBH"
+- Second row: BAB or YAY
+- Third row: HYH - HBH
+### Heart of Energy
+- Superior Energy Core *4 => This Level of Energy Core
+### Ultimate Heart Fragment
+- For synthesis purposes only
+- Recipe: Level 6 Ultimate Energy Core A, Fading Matter Flower Pot B, Fading Matter Block C, Nether Core D
+- The first line is ABA
+- Second line CDC
+- Third row ABA
+### Ultimate Heart
+- It can be placed in the center of the conversion table on the right to obtain 200 trillion EMC per time
+- You can place it on the left conversion table to empty your EMC
+- But there is no migration and replication function
+- Recipe: Ultimate Energy Flower Pot A, Ultimate Heart Fragment B, Dragon Egg C
+- The first line is ABA
+- Second line BCB
+- Third row ABA
+### Book of Knowledge Sharing
+- Shift+right-click to write knowledge, but if the knowledge has already been written, it cannot be written again, and the book will become enchanted
+- Right-click to access the knowledge within
+- Recipe: Violet Matter Block A, Nether Heart B, Book and Pen C
+- The first line is ABA
+- Second line BCB
+- Third row ABA
+### Alchemy Secret Scroll
+- There is a recipe to obtain it, but it requires a huge cost, which is approximately 23.84 billion trillion EMC (23,846,627,553,001,305,725,781,076 EMC, or approximately 23.84 × 10^24).
+- Recipe: Book of Knowledge Sharing A, Ultimate Heart Fragment B, Ultimate Heart C
+- First line: ABA
+- Second row BCB
+- Third row ABA
 ---
 
-##  新增内容
+## New content
 
-- **对比 1.12.2 版本新增**：
-- 物质与煤炭方块，方便储存。
-- 新增更高级的“能量之星”等级。
-- 时间立场加速器(开销巨大)与力量花盆加速器(开销友好)
+- **Comparison: New additions in version 1.12.2:**
+- Material and coal blocks for convenient storage.
+- Added a higher level of "Energy Star" rating.
+- Time Position Accelerator (with high cost) and Strength Flowerpot Accelerator (with friendly cost)
 ---
-- 当前存在另一个基于ASM修改上限的移植版,对物品功能的移植更完善,
+- Currently, there is another ported version based on ASM modification caps, which has a more complete porting of item functions,
   https://github.com/YatzCore/FTB-ProjectEX-1.7.10/tree/main/src/main/java/com/latmod/mods/projectex,
-(以下是一堆废话,普通玩家不必看)
-##  实现方案（开发者向）
+  (The following is a bunch of nonsense, ordinary players don't need to read it)
+## Implementation Plan (For Developers)
 
-### EMC 上限处理
-- **新建玩家数据**：`rEmc`（BigInteger 类型）
-- **新建物品 EMC 对照表**：`rEmcMap`（BigInteger 类型）
-- **Mixin 注入**：
-#### 玩家EMC
-- 对大量涉及玩家 EMC 和物品 EMC 的类进行注入。
-- 修改了转化桌的EMC显示,和排序方式,物品是否显示判定,可能会导致搜索bug,但貌似没加这个mod也有这个bug
-- 原版玩家 EMC 使用 `double` 存储数据, 即便修改了上限也不能超过`10^308`, 原版为了不丢精度使用了另一上限 
-- 为了避免精度丢失使用 `rEmc` 存储实际 EMC， 然后回传原版 EMC 系统
-#### 物品EMC
-- 在物品的emc超过`2^31-1` EMC 时会启用rEmcMap注册表,注册该物品的 EMC
-- 指令使用`/prex setEmc <EmcValue>`来设置超上限的Emc,`/prex reload`注册到rEmcMap中
-### 配方计算
-- mixin会拦截配方总EMC超 `int` 上限的错误。
-- 使用 `PrEmcMapV.valueForConversion` 函数重计算，注册到 `rEmcMap`。
-- 任然会以原版等价交换系统 `int` 上限正常注册到原版EMC注册表中，避免报错。
-### 方块拦截
-- 大部分涉及 EMC 的方块已拦截改写。
-- **炼金术箱尚未完善**（尤其 mk2），部分不常用方块未拦截。
-- 欢迎提交完善。
-### 方案的局限性
-- 这样处理任然有局限性,比如兼容很差,所以更为好的处理方式应当是使用ASM修改字节码,
-但工程量应该会巨大,但这样处理原版的等价会更好,兼容性方面也会好些,新的移植版就是这样做的,
-并且它已经实现了很多方块的类,并替换了应用能源学的功能.
-### 力量花盆加速器
-- 在方块实体触发更新时,且系统计时达到990ms时
-- 通过扫描加速范围的方块实体,判断是不是力量花盆,然后增加力量花盆的 tick 实现加速
-
----
-
-## 🤝 参与完善
-
-如果你有完善意愿，欢迎提交 Pull Request。  
-尤其是炼金术箱相关功能，仍有较大优化空间。
+### EMC upper limit processing
+- **New player data**: `rEmc` (BigInteger type)
+- **New item EMC comparison table**: `rEmcMap` (BigInteger type)
+- **Mixin Injection**:
+#### Player EMC
+- Inject into a large number of classes involving player EMC and item EMC.
+- Modified the EMC display and sorting method of the conversion table, as well as the determination of whether items are displayed, which may lead to search bugs. However, it seems that this bug also exists without this mod
+- The original version of the player EMC uses `double` to store data, and even if the upper limit is modified, it cannot exceed `10^308`. To avoid losing precision, the original version uses another upper limit
+- To avoid loss of accuracy, use `rEmc` to store the actual EMC, and then transmit it back to the original EMC system
+#### Item EMC
+- When the EMC of an item exceeds `2^31-1` EMC, the rEmcMap registry will be activated to register the EMC of that item
+- Use the command `/prex setEmc <EmcValue>` to set the Emc value exceeding the upper limit, and `/prex reload` to register it in rEmcMap
+### Recipe calculation
+- The mixin will intercept errors where the total EMC of the recipe exceeds the upper limit of `int`.
+- Recalculate using the `PrEmcMapV.valueForConversion` function and register it in `rEmcMap`.
+- Renran will still register normally in the original EMC registry with the upper limit of the original equivalent exchange system 'int', to avoid errors.
+### Block Interception
+- Most of the blocks involving EMC have been intercepted and rewritten.
+- **The alchemy chest is not yet perfected** (especially for mk2), and some infrequently used blocks have not been intercepted.
+- We welcome submissions for improvement.
+### Limitations of the scheme
+- This approach still has limitations, such as poor compatibility. Therefore, a better solution would be to use ASM to modify bytecode,
+  However, the workload should be substantial. Nonetheless, handling the original version in this manner would yield better equivalence and improved compatibility. This is precisely what the new ported version has done,
+  And it has implemented many square-like classes and replaced the function of applying energy science
+### Power Flowerpot Accelerator
+- When the block entity triggers an update and the system timing reaches 990ms
+- By scanning the block entities within the acceleration range, determine whether they are power flowerpots, and then increase the ticks of the power flowerpots to achieve acceleration
 
 ---
+
+## 🤝 Participate in improvement
+
+If you have a strong desire to improve, feel free to submit a Pull Request.  
+Especially for the functions related to the alchemy chest, there is still considerable room for optimization.
+
+---
+Translation provided by Baidu AI Translation

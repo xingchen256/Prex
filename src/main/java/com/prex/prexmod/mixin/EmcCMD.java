@@ -91,14 +91,16 @@ class EmcParser{
         PrExEmcMapFile.removeFromFile(name,meta);
     }
 }
-@Mixin(value = ReloadEmcCMD.class,remap = false)
+@Mixin(ReloadEmcCMD.class)
 class EmcReload{
     @Inject(method = "func_71515_b",at= @At(value = "INVOKE",
-            target = "Lmoze_intel/projecte/config/CustomEMCParser;readUserData()V"))
+            target = "Lmoze_intel/projecte/config/CustomEMCParser;readUserData()V"),remap = false)
     public void function(ICommandSender sender, String[] params, CallbackInfo ci){
         PrExEmcMapFile.readFile();
     }
-    @Inject(method = "func_71515_b",at= @At(value = "INVOKE", target = "Lmoze_intel/projecte/network/PacketHandler;sendFragmentedEmcPacketToAll()V"))
+    @Inject(method = "func_71515_b",
+            at= @At(value = "INVOKE", target = "Lmoze_intel/projecte/network/PacketHandler;sendFragmentedEmcPacketToAll()V"),
+    remap = false)
     public void func(ICommandSender sender, String[] params, CallbackInfo ci){
         NetworkHandler.REmcMap.sendToAll(new PrEmcMapS(PrEmcMap.gets()));
     }

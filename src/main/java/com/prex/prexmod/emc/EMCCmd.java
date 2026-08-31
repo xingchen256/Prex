@@ -8,7 +8,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentTranslation;
 
-import java.math.BigDecimal;
 import java.math.BigInteger;
 
 public class EMCCmd extends CommandBase {
@@ -44,11 +43,11 @@ public class EMCCmd extends CommandBase {
                 }
                 if (emc.compareTo(BigInteger.valueOf(Integer.MAX_VALUE))<=0) {
                     iCommandSender.addChatMessage(new ChatComponentTranslation("prex.command.set.min"));
-                }else if(emc.compareTo(BigDecimal.valueOf(Double.MAX_VALUE).toBigInteger())>=0){
+                }else if(emc.toString().length()>=107){
                     iCommandSender.addChatMessage(new ChatComponentTranslation("prex.command.set.max"));
                 }else{
                     PrExEmcMapFile.addToFile(du,meta,emc);
-                    CustomEMCParser.addToFile(du,meta, Integer.MAX_VALUE);
+                    CustomEMCParser.addToFile(du,meta, Integer.MAX_VALUE-1);
                     iCommandSender.addChatMessage(new ChatComponentTranslation("prex.command.setemc",dp,emc));
                 }
                 return;
@@ -68,7 +67,6 @@ public class EMCCmd extends CommandBase {
                         }else{
                             iCommandSender.addChatMessage(new ChatComponentTranslation("prex.command.unknow",dp));
                         }
-
                         break;
                     default:
                         iCommandSender.addChatMessage(new ChatComponentTranslation("prex.command.ttth"));

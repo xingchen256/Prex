@@ -71,7 +71,7 @@ public abstract class RecipeItemEmc{
             throw new RuntimeException(e);
         }
 //        FMLLog.warning("FQWW Conversion result: "+ conversion +result);
-        return Fraction.getFraction(Integer.MAX_VALUE,1);
+        return Fraction.getFraction(Integer.MAX_VALUE-1,1);
 
     }
 }

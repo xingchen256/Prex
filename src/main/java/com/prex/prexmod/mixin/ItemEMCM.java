@@ -38,7 +38,7 @@ public class ItemEMCM {
                     BigInteger.valueOf(Integer.MAX_VALUE)
             )>0){
                 cir.setReturnValue(
-                        Integer.MAX_VALUE
+                        Integer.MAX_VALUE-1
                 );
             }
             else{

@@ -175,7 +175,7 @@ item.prex_final_star.name=终极之心
 
 item.knowledge_share_book.name=知识共享之书
 
-prex.command.set.max=抱歉值: %s超过了10^108如果您执意使用这个值可能会导致严重的后果
+prex.command.set.max=EMC:%s过大,请试试小于10^64的值
 prex.command.set.num=请输入正确的正整数
 prex.command.setemc=已将%s设置为%s Emc
 prex.command.set.min=该emc过于低请使用/projecte setEMC [meta] [EmcValue]
@@ -183,5 +183,12 @@ prex.command.remove=已移除%s的emc
 prex.command.rest=已重置%s的emc
 prex.command.unknow=%s的emc未发生改变请检查是否注册在了一般emc表中
 prex.command.ph=请手持物品在执行
-prex.command.reload.tok=EMC数据包已接收
+prex.command.reload.tok=EMC数据包已加载
 prex.command.ttth=手持物品使用/prex setEmc <EmcValue>|restEmc|removeEmc来设置,重置,删除超上限Emc表,将超限emc设为非超限请先移除emc
+
+item.equivalentenergistics:EMCCell.8.name=9级EMC能源存储磁盘
+item.equivalentenergistics:EMCCell.9.name=10级EMC能源存储磁盘
+item.equivalentenergistics:EMCCell.10.name=11级EMC能源存储磁盘
+item.equivalentenergistics:EMCCell.11.name=12级EMC能源存储磁盘
+item.equivalentenergistics:EMCCell.12.name=13级EMC能源存储磁盘
+item.equivalentenergistics:EMCCell.13.name=终极EMC能源存储磁盘

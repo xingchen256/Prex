@@ -5,6 +5,7 @@
   "compatibilityLevel": "JAVA_8",
   "required": false,
   "mixins": [
+    "AddEmcCellMixin",
     "builder_wands",
     "Conderser",
     "EmcCondenserBase",
