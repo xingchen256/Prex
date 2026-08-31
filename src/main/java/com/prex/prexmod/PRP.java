@@ -34,8 +34,6 @@ public class PRP implements ILateMixinLoader {
                 "ItemInput",
                 "ItemLock",
                 "ItemTips",
-                "EmcCMD",
-                "RemoveEmc",
                 "EmcParser",
                 "playerget",
                 "ProjectEEMCMixin",

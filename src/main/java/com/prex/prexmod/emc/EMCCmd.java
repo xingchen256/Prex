@@ -1,9 +1,6 @@
 package com.prex.prexmod.emc;
 
 import moze_intel.projecte.config.CustomEMCParser;
-import moze_intel.projecte.emc.EMCMapper;
-import moze_intel.projecte.handlers.TileEntityHandler;
-import moze_intel.projecte.network.PacketHandler;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.player.EntityPlayer;
@@ -72,18 +69,6 @@ public class EMCCmd extends CommandBase {
                             iCommandSender.addChatMessage(new ChatComponentTranslation("prex.command.unknow",dp));
                         }
 
-                        break;
-                    case "reload":
-                        iCommandSender.addChatMessage(new ChatComponentTranslation("prex.command.reload.ing"));
-                        EMCMapper.clearMaps();//Fuck EmcMapper
-                        PrEmcMap.clear();
-                        PrExEmcMapFile.readFile();
-                        CustomEMCParser.readUserData();
-                        EMCMapper.map();
-                        TileEntityHandler.checkAllCondensers();
-                        NetworkHandler.REmcMap.sendToAll(new PrEmcMapS(PrEmcMap.gets()));
-                        PacketHandler.sendFragmentedEmcPacketToAll();
-                        iCommandSender.addChatMessage(new ChatComponentTranslation("prex.command.reload.ok"));
                         break;
                     default:
                         iCommandSender.addChatMessage(new ChatComponentTranslation("prex.command.ttth"));

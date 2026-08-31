@@ -36,7 +36,10 @@ public class PrEmcMap {
     public static boolean contains(SimpleStack key) {
         SimpleStack copy = key.copy();
         copy.qnty = 1;
-        return emc.containsKey(copy);
+        if (emc.containsKey(copy)) {
+            return !emc.get(copy).equals(BigInteger.ZERO);
+        }
+        return false;
     }
     public static boolean contains(ItemStack key) {
         SimpleStack copy=new SimpleStack(key);
@@ -49,10 +52,10 @@ public class PrEmcMap {
     public static BigInteger get(SimpleStack stack) {
         SimpleStack copy = stack.copy();
         copy.qnty = 1;
-        ItemStack q=stack.toItemStack();
-        if(PrExEmcMapFile.containsKey(q)){
-            return new BigInteger(PrExEmcMapFile.getEMC(q));
-        }
+//        ItemStack q=stack.toItemStack();
+//        if(PrExEmcMapFile.containsKey(q)){
+//            return new BigInteger(PrExEmcMapFile.getEMC(q));
+//        }
         return emc.get(copy);
     }
     public static final Comparator<ItemStack> EMCDDD = new Comparator<ItemStack>() {

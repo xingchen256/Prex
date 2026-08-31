@@ -1,11 +1,16 @@
 package com.prex.prexmod.mixin;
 
+import com.prex.prexmod.emc.NetworkHandler;
+import com.prex.prexmod.emc.PrEmcMap;
+import com.prex.prexmod.emc.PrEmcMapS;
 import com.prex.prexmod.emc.PrExEmcMapFile;
 import moze_intel.projecte.config.CustomEMCParser;
 import moze_intel.projecte.network.commands.ReloadEmcCMD;
+import net.minecraft.command.ICommandSender;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 /*思路修改parseInteger部分，将超过上限的设为1,
@@ -86,14 +91,15 @@ class EmcParser{
         PrExEmcMapFile.removeFromFile(name,meta);
     }
 }
-@Mixin(ReloadEmcCMD.class)
+@Mixin(value = ReloadEmcCMD.class,remap = false)
 class EmcReload{
-//    @Inject(method = "func_71515_b",at= @At(value = "INVOKE",
-//            target = "Lmoze_intel/projecte/config/CustomEMCParser;readUserData()V"),
-//    remap = false)
-//    public void function(ICommandSender sender, String[] params, CallbackInfo ci){
-//        PrEmcMap.clear();//移除所有PrEmc,重载后会重新计算
-//        PrExEmcMapFile.readFile();//读取文件并填入指定Emc
-//        NetworkHandler.REmcMap.sendTo(new PrEmcMapS(PrEmcMap.gets()),(EntityPlayerMP) sender);//消息通信
-//    }
+    @Inject(method = "func_71515_b",at= @At(value = "INVOKE",
+            target = "Lmoze_intel/projecte/config/CustomEMCParser;readUserData()V"))
+    public void function(ICommandSender sender, String[] params, CallbackInfo ci){
+        PrExEmcMapFile.readFile();
+    }
+    @Inject(method = "func_71515_b",at= @At(value = "INVOKE", target = "Lmoze_intel/projecte/network/PacketHandler;sendFragmentedEmcPacketToAll()V"))
+    public void func(ICommandSender sender, String[] params, CallbackInfo ci){
+        NetworkHandler.REmcMap.sendToAll(new PrEmcMapS(PrEmcMap.gets()));
+    }
 }

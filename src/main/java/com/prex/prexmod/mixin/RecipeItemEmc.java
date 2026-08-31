@@ -22,20 +22,6 @@ import java.util.Map;
 
 @Mixin(value = SimpleGraphMapper.class,remap = false)
 public abstract class RecipeItemEmc{
-    @Inject(method = "valueForConversion",at= @At(value = "RETURN",ordinal = 0),cancellable = true,remap = false)
-    public void twee(Map values,
-                     @Coerce Object conversion,
-                     CallbackInfoReturnable cir){
-        Object value = cir.getReturnValue();
-        int t=((Fraction)value).getNumerator();
-        if(t==2147483647||t==1073741823||t==715827882||
-        t==536870911|| t==429496729||
-        t==357913941|| t==306783378||
-        t==268435455|| t==238609294){//特殊值,意味着出现了int上限问题
-            tw(values,conversion);
-        }
-
-    }
     @Inject(
             method = "valueForConversion",
             at = @At(value = "INVOKE",

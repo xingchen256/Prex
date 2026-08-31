@@ -82,9 +82,7 @@ public class PrExEmcMapFile {
     public static void readFile() {//读取文件
         PrExEmcMap = new HashMap<>();
         if (!PrExFile.exists()) {
-            // 文件不存在，创建一个空数组文件
-            writeFile(); // 此时 PrExEmcMap 为空，会写入 []
-            return;
+            writeFile();
         }
         try {
             String content = new String(Files.readAllBytes(PrExFile.toPath()));

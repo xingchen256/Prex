@@ -1,6 +1,6 @@
 # PrEx MOD 等价交换扩展 1.7.10 移植版(Minecraft Project Expansion1.7.10)
 
-## 📦 食用方法
+## 食用方法
 
 1. **构建**：将 Build 出的 JAR 文件放入 `mods` 文件夹。
 2. **修改配置**：打开 JAR 文件中的 `META-INF` 文件夹，找到对应文件并删除以下行：
@@ -24,7 +24,7 @@
 - 等价能源学(请不要使总输出物品的EMC超过10^308,包括GTNH版本,依赖任使用本mod的依赖),已实现View EMC,PEEX,Tome of Knowledge Sharing,PEAA的全部功能
 ---
 
-## 🧱 物品与方块速率公式
+## 物品与方块速率公式
 
 ### 力量花盆（输出速率）
 - 会给放置它的玩家每秒提供一定的EMC,如果玩家下线会累积EMC当玩家重新上线一次性给予玩家期间产生的EMC(如果服务器关闭或区块不加载不会保存进度),其EMC存储上限为`107,374,182x自身的生产效率`,超过不再生产EMC
@@ -115,7 +115,7 @@
 - 当前存在另一个基于ASM修改上限的移植版,对物品功能的移植更完善,
   https://github.com/YatzCore/FTB-ProjectEX-1.7.10/tree/main/src/main/java/com/latmod/mods/projectex,
 (以下是一堆废话,普通玩家不必看)
-## 🛠️ 实现方案（开发者向）
+##  实现方案（开发者向）
 
 ### EMC 上限处理
 - **新建玩家数据**：`rEmc`（BigInteger 类型）
@@ -128,13 +128,11 @@
 - 为了避免精度丢失使用 `rEmc` 存储实际 EMC， 然后回传原版 EMC 系统
 #### 物品EMC
 - 在物品的emc超过`2^31-1` EMC 时会启用rEmcMap注册表,注册该物品的 EMC
-- 比较遗憾,指令部分尚未完善,所以使用指令设定 EMC 只能在`2~31-1`之下
-- 欢迎提交完善。
+- 指令使用`/prex setEmc <EmcValue>`来设置超上限的Emc,`/prex reload`注册到rEmcMap中
 ### 配方计算
 - mixin会拦截配方总EMC超 `int` 上限的错误。
 - 使用 `PrEmcMapV.valueForConversion` 函数重计算，注册到 `rEmcMap`。
 - 任然会以原版等价交换系统 `int` 上限正常注册到原版EMC注册表中，避免报错。
-
 ### 方块拦截
 - 大部分涉及 EMC 的方块已拦截改写。
 - **炼金术箱尚未完善**（尤其 mk2），部分不常用方块未拦截。
@@ -149,30 +147,9 @@
 
 ---
 
-## 📁 文件结构说明
-
-| 路径/类                     | 说明                                |
-|--------------------------|-----------------------------------|
-| `emc/`                   | 存放 `rEmc` 和 `rEmcMap` 相关类         |
-| `PrEmcMapV`              | 超 int 上限配方的重计算类                   |
-| `ItemEMCTC` / `ItemEMCT` | 转化桌对 `rEmc` 和 `rEmcMap` 的兼容类      |
-| `ItemEMCM` / `ItemEMCH`  | 原版 EMC 对照表获取的 Mixin 兼容（可能删掉兼容会好些） |
-| `ItemTips`               | 兼容 `rEmcMap` 的提示显示                |
-| `ProjectMaxEMC`          | 修改原版 EMC 数据限制                     |
-| `RecipeItemEmc`          | 拦截超 int 上限配方报错                    |
-| `QWQ`                    | 力量花盆速率计算与保存                       |
-| `recipe`                 | MOD 全部配方注册类（可按需修改）                |
-| `Test`                   | 测试数据输出                            |
-| `block/`                 | MOD 中的全部方块类都在里面,PrExBlocks是方块注册类  |
-| `item/`                  | MOD中的所有物品类都在里面,,PrExItems是物品注册类   |
-
----
-
 ## 🤝 参与完善
 
 如果你有完善意愿，欢迎提交 Pull Request。  
 尤其是炼金术箱相关功能，仍有较大优化空间。
 
 ---
-
-> 📌 *说明文档部分使用AI生成,部分数据可能不准确,但代码不是(虽说是屎⛰️)*

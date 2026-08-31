@@ -16,6 +16,9 @@ import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import moze_intel.projecte.config.CustomEMCParser;
+import moze_intel.projecte.emc.EMCMapper;
+import moze_intel.projecte.handlers.TileEntityHandler;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.launchwrapper.Launch;
@@ -126,7 +129,6 @@ public class ExampleMod {
         );
         NetworkHandler.init();
         FMLCommonHandler.instance().bus().register(new powerFlowerEven());
-        PrExEmcMapFile.readFile();//加载Emc
 //        PrEmcMap.put(new SimpleStack(new ItemStack(Item.getItemFromBlock(PrExBlocks.matters[11]))),new BigInteger("41000047483647"));
     }
 
@@ -161,9 +163,13 @@ public class ExampleMod {
             e.printStackTrace();
         }
     }
-
     @Mod.EventHandler
     public void onServerStartingEvent(FMLServerStartingEvent event) {
         event.registerServerCommand(new EMCCmd());
+        PrExEmcMapFile.readFile();
+        EMCMapper.clearMaps();
+        CustomEMCParser.readUserData();
+        EMCMapper.map();
+        TileEntityHandler.checkAllCondensers();
     }
 }
