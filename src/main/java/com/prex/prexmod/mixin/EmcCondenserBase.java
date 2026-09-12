@@ -59,6 +59,24 @@ class ProjectEMixin{
         cir.setReturnValue((double)EMCHelper.getEmcValue(itemStack));
     }
 }
+//@Mixin(value = ItemStorageComponent.class,remap = false)
+//class AddEmcTTT{
+//    @ModifyConstant(method = "<init>",constant = @Constant(intValue = 8))
+//    private static int ttte(int constant){
+//        return 14;
+//    }
+//    @Inject(method = "func_77613_e",at=@At("RETURN"),cancellable = true,remap = false)
+//    public void ffff(ItemStack stack, CallbackInfoReturnable<EnumRarity> cir) {
+//        cir.setReturnValue(EnumRarity.values()[0]);
+//        System.out.println("QQQQQQQQQQQQ"+stack.getItemDamage());
+//    }
+//
+//    @Inject(method = "func_77617_a",at=@At("RETURN"),cancellable = true,remap = false)
+//    public void tttt(int damage, CallbackInfoReturnable<IIcon> cir) {
+//        cir.setReturnValue(TextureEnum.EMCSTORAGECOMPONENT.getTexture(0));
+//        System.out.println("TTTTTTTTTTTTTTTTTTTT"+damage);
+//    }
+//}
 @Mixin(value = ItemEMCCell.class,remap = false)
 class AddEmcCellMixin{
     @Shadow

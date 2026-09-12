@@ -6,6 +6,7 @@
   "required": false,
   "mixins": [
     "AddEmcCellMixin",
+    "AddEmcTTT",
     "builder_wands",
     "Conderser",
     "EmcCondenserBase",

@@ -345,5 +345,11 @@ public class oldRecipe {
                 'H', new ItemStack(PrExItems.KnowledgeShareBook, 1),
                 'A',new ItemStack(PrExItems.finalStarShard,1)
         );
+//        for (int i = 8; i < 12; i++) {
+//            GameRegistry.addShapelessRecipe(
+//                    ItemEnum.EMCCELL.getDamagedStack(i),
+//                    ItemEnum.MISCITEM.getDamagedStack(0),
+//                    ItemEnum.CELLCOMPONENT.getDamagedStack(i));
+//        }
     }
 }
