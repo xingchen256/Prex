@@ -11,6 +11,7 @@
     "Conderser",
     "EmcCondenserBase",
     "EMCCraftingPatternMixin",
+    "emccrystalMixin",
     "EmcReload",
     "FuelMap",
     "ItemConsume",

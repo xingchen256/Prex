@@ -1,12 +1,10 @@
 package com.prex.prexmod.mixin;
 
-import com.google.common.collect.Lists;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.prex.prexmod.block.PrExBlocks;
 import com.prex.prexmod.emc.PrEXEMC;
 import com.prex.prexmod.emc.PrEmcMap;
 import com.prex.prexmod.item.PrExItems;
-import moze_intel.projecte.emc.SimpleStack;
 import moze_intel.projecte.gameObjs.container.inventory.TransmutationInventory;
 import moze_intel.projecte.playerData.Transmutation;
 import net.minecraft.block.Block;
@@ -27,7 +25,6 @@ import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Iterator;
-import java.util.List;
 
 //提升EMC上限取消限制,注意EMC不能超过1.79769313486231570E+308,精度会有BigInter来控制
 @Mixin(value = TransmutationInventory.class)
@@ -108,13 +105,15 @@ public class ProjectMaxEMC {
 @Mixin(targets = "moze_intel.projecte.emc.FuelMapper")
 class FuelMap{
     @Shadow
-    private static final List<SimpleStack> FUEL_MAP = Lists.newArrayList();
+    private static void addToMap(ItemStack stack) {
+    }
+
     @Inject(method = "loadMap",
             at= @At(value = "INVOKE",
                     target = "Ljava/util/Collections;sort(Ljava/util/List;Ljava/util/Comparator;)V"),
     remap = false)
     private static void addtomap(CallbackInfo ci) {
-        for (Item a : PrExItems.fule) FUEL_MAP.add(new SimpleStack(new ItemStack(a, 1)));
-        for (Block a : PrExBlocks.fuels) FUEL_MAP.add(new SimpleStack(new ItemStack(Item.getItemFromBlock(a), 1)));
+        for (Item a : PrExItems.fule) addToMap(new ItemStack(a, 1));
+        for (Block a : PrExBlocks.fuels) addToMap(new ItemStack(Item.getItemFromBlock(a), 1));
     }
 }

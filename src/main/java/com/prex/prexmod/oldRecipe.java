@@ -22,6 +22,7 @@ public class oldRecipe {
         recipe.powerflower();
         misc();
         recipe.SpeedUpdate();
+        recipe.Cell();
 
     }
     public static void relay(){

@@ -1,8 +1,10 @@
 package com.prex.prexmod;
 
+import com.mordenkainen.equivalentenergistics.items.ItemEnum;
 import com.prex.prexmod.block.PrExBlocks;
 import com.prex.prexmod.item.Matter;
 import com.prex.prexmod.item.PrExItems;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import moze_intel.projecte.gameObjs.ObjHandler;
 import net.minecraft.block.Block;
@@ -10,7 +12,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.ShapedOreRecipe;
 
+import static com.prex.prexmod.ExampleMod.EECell;
 import static com.prex.prexmod.block.PrExBlocks.matters;
 
 
@@ -26,6 +30,50 @@ public class recipe {
         powerflower();
         misc();
         SpeedUpdate();
+        Cell();
+    }
+    public static void Cell(){
+        if(!Loader.isModLoaded("equivalentenergistics"))return;
+        Item aeMaterial = GameRegistry.findItem("appliedenergistics2", "item.ItemMultiMaterial");
+        ItemStack base = new ItemStack(GameRegistry.findItem("appliedenergistics2", "tile.BlockSkyStone"), 1, 1);
+        Item aeGlass = GameRegistry.findItem("appliedenergistics2", "tile.BlockQuartzGlass");
+        for (int i = 8; i < EECell; i++) {
+            GameRegistry.addShapelessRecipe(
+                    ItemEnum.EMCCELL.getDamagedStack(i),
+                    ItemEnum.MISCITEM.getDamagedStack(0),
+                    ItemEnum.CELLCOMPONENT.getDamagedStack(i));
+        }
+        for (int i = 8; i < EECell; i++) {
+            GameRegistry.addShapedRecipe(
+                    ItemEnum.CELLCOMPONENT.getDamagedStack(i),
+                    "NEN",
+                    "SGS",
+                    "NSN",
+                    'N',
+                    new ItemStack(Items.nether_star),
+                    'E',
+                    new ItemStack(aeMaterial, 1, 24),
+                    'S',
+                    ItemEnum.CELLCOMPONENT.getDamagedStack(i - 1),
+                    'G',
+                    new ItemStack(aeGlass, 1));
+        }
+        for (int i = 8; i < EECell; i++) {
+            GameRegistry.addRecipe(
+                    new ShapedOreRecipe(
+                            ItemEnum.EMCCELL.getDamagedStack(i),
+                            "GRG",
+                            "RSR",
+                            "III",
+                            'G',
+                            new ItemStack(aeGlass, 1),
+                            'R',
+                            "dustRedstone",
+                            'S',
+                            ItemEnum.CELLCOMPONENT.getDamagedStack(i),
+                            'I',
+                            "ingotIron"));
+        }
     }
     public static void powerflower(){
         for(int i=0;i<PrExBlocks.power_flower.length;i++){

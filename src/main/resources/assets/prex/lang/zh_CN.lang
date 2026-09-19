@@ -186,9 +186,11 @@ prex.command.ph=请手持物品在执行
 prex.command.reload.tok=EMC数据包已加载
 prex.command.ttth=手持物品使用/prex setEmc <EmcValue>|restEmc|removeEmc来设置,重置,删除超上限Emc表,将超限emc设为非超限请先移除emc
 
-item.equivalentenergistics:EMCCell.8.name=9级EMC能源存储磁盘
-item.equivalentenergistics:EMCCell.9.name=10级EMC能源存储磁盘
-item.equivalentenergistics:EMCCell.10.name=11级EMC能源存储磁盘
-item.equivalentenergistics:EMCCell.11.name=12级EMC能源存储磁盘
-item.equivalentenergistics:EMCCell.12.name=13级EMC能源存储磁盘
-item.equivalentenergistics:EMCCell.13.name=终极EMC能源存储磁盘
+item.prex.storage_cell=%s 级EMC能源存储磁盘
+item.prex.storage_component=%s 级EMC能源存储元件
+item.equivalentenergistics:EMCStorageComponent.8.name=9级EMC能源存储元件
+item.equivalentenergistics:EMCStorageComponent.9.name=10级EMC能源存储元件
+item.equivalentenergistics:EMCStorageComponent.10.name=11级EMC能源存储元件
+item.equivalentenergistics:EMCStorageComponent.11.name=12级EMC能源存储元件
+item.equivalentenergistics:EMCStorageComponent.12.name=13级EMC能源存储元件
+item.equivalentenergistics:EMCStorageComponent.13.name=14级EMC能源存储元件

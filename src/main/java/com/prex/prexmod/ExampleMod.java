@@ -36,16 +36,19 @@ import java.lang.reflect.Method;
 * 血的教训呀，千万不要把mod名改的比要依赖的mod先呀，
 * 不然可能找了6个小时BUG才能找到原因，
 * 不要自以为是的修改输出的jar名，没一点用的*/
-@Mod(modid = ExampleMod.MODID, name = ExampleMod.NAME, useMetadata = true)
+@Mod(modid = ExampleMod.MODID, name = ExampleMod.NAME, useMetadata = true,dependencies = "before:equivalentenergistics")
 public class ExampleMod {
     public static final String MODID = "prex";
     public static final String NAME = "PrEX Mod";
     public static final String VERSION = "1.0.0";
     public static Configuration config;
 
+    public static final double[] CRYSTAL_VALUES=new double[]{(double)1.0F, (double)256.0F, (double)16_384.0F, (double)35184372072448.0F, (double)75557863655545579257856F};
     public static boolean enableRecipe;
     public static boolean enableTimerMachine;
-    public static boolean enabledEE;
+    public static int EECell;
+    public static float EECellN;//n值
+    public static float EECellP;
 
     public static final Logger LOG = LogManager.getLogger(NAME);
 
@@ -75,14 +78,19 @@ public class ExampleMod {
         PrExEmcMapFile.readFile();
         INSTANCE = this;
         config = new Configuration(event.getSuggestedConfigurationFile());
-
         config.load();
-
+        if (Loader.isModLoaded("equivalentenergistics")) {
+                   }
+        EECell=config.get(Configuration.CATEGORY_GENERAL,"EECell",
+                16,"添加 n 个Emc存储磁盘(8<n<=168)\n第i个存储磁盘的存储上限为 4^i*10^6 EMC\n警告:这个选项在调大后不可逆,否则会导存档损坏").getInt();
+        if(EECell<8 || EECell>168)EECell=8;
+        EECellN= (float) EECell /3;
+        EECellP= (float) EECell /7;
         enableRecipe = config.get(
                 Configuration.CATEGORY_GENERAL,
                 "enableRecipe",
                 true,
-                "启用新的配方(更高EMC的合成)"
+                "启用新的配方(更高EMC的合成)\n同时会调整应用能源学Emc Crystal的Emc价值,通常意味着高字节数"
         ).getBoolean();
         if (!enableRecipe) {
             for (int i=0;i<PowerFlower.gen.length;i++){
