@@ -174,20 +174,39 @@ item.prex_final_star.name=Final Star
 
 item.knowledge_share_book.name=Book of Shared Knowledge
 
-prex.command.set.max=EMC:%s is too high, please use a value less than 10^64
+prex.item.knowledge_share_book.tip1=Shift-right-click to record your knowledge
+prex.item.knowledge_share_book.tip2=Right-click to retrieve the knowledge inside
+prex.item.knowledge_share_book.tip3=Author:
+
+prex.item.finalStart_tip1=Try placing it to the left of the Transmutation Table; it might provide you with some EMC
+prex.item.finalStart_tip2=What? EMC too high? Try placing it in the middle on the right; it will devour all your EMC
+prex.item.finalStart_tip3=Then again, maybe I remembered it backwards
+
+prex.command.set.max=EMC: %s is too large, please try a value less than 10^64
 prex.command.set.num=Please enter a valid positive integer
 prex.command.setemc=Set %s to %s EMC
-prex.command.set.min=That EMC value is too low, please use /projecte setEMC [meta] [EmcValue]
+prex.command.set.min=This EMC is too low; please use /projecte setEMC [meta] [EmcValue]
 prex.command.remove=Removed EMC for %s
 prex.command.rest=Reset EMC for %s
-prex.command.unknow=EMC for %s did not change, please check if it is registered in the general EMC table
-prex.command.ph=Please hold an item in your hand while executing
+prex.command.unknow=EMC for %s was not changed; please check whether it is registered in the normal EMC table
+prex.command.ph=Please hold an item in your hand before executing
 prex.command.reload.tok=EMC data pack loaded
-prex.command.ttth=Hold an item and use /prex setEmc <EmcValue> | restEmc | removeEmc to set, reset, or remove over-limit EMC values. To set an over-limit EMC to a non-over-limit value, please remove the EMC first.
+prex.command.ttth=Hold an item and use /prex setEmc <EmcValue>|restEmc|removeEmc to set, reset, or remove the over-limit EMC table. To set an over-limit EMC as non-over-limit, remove the EMC first
 
-item.equivalentenergistics:EMCCell.8.name=Tier 9 EMC Storage Cell
-item.equivalentenergistics:EMCCell.9.name=Tier 10 EMC Storage Cell
-item.equivalentenergistics:EMCCell.10.name=Tier 11 EMC Storage Cell
-item.equivalentenergistics:EMCCell.11.name=Tier 12 EMC Storage Cell
-item.equivalentenergistics:EMCCell.12.name=Tier 13 EMC Storage Cell
-item.equivalentenergistics:EMCCell.13.name=Ultimate EMC Storage Cell
+prex.tile.emcmax=Maximum EMC output
+prex.tile.emcstore=Maximum storage:
+prex.tile.tttip=Server owner friendly
+prex.tile.updateSpeed_tips=Used to accelerate the speed of nearby blocks, plants, etc.
+prex.tile.updateSpeed_size=Effect range: %s x %s x %s (centered on itself)
+prex.tile.updateSpeed_ptb=Maximum block effect multiplier:
+prex.tile.updateSpeed_ptf=Maximum random tick effect multiplier:
+prex.tile.updateSpeed_othertips=Fill up a whole chunk and the server owner will be thrilled
+prex.tile.updateSpeedPowerFlower_tips=Used to accelerate the working speed of nearby Power Flowers
+prex.tile.updateSpeedPowerFlower_pt=Acceleration multiplier:
+prex.tile.updateSpeedPowerFlower_othertips=Server owner friendly
+prex.tile.powerflower_tips=Maximum efficiency:
+prex.tile.collector_store=Storage limit: %s
+prex.tile.relay.output=Maximum output: %s
+
+item.prex.storage_cell=Tier %s EMC Storage Cell
+item.prex.storage_component=Tier %s EMC Storage Component

@@ -7,6 +7,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -23,29 +24,17 @@ public class RelayItem extends ItemBlock {
         for(int i=0;i<PrExBlocks.basicRelays.length;i++){
             if(Item.getItemFromBlock(PrExBlocks.basicRelays[i])==s.getItem()){
                 if(i<3){
-
-                    switch (i){
-                        case 0:{
-                            l.add(EnumChatFormatting.DARK_PURPLE+"最大输出:"+EnumChatFormatting.BLUE+64);
-                            l.add(EnumChatFormatting.DARK_PURPLE+"存储上限:"+EnumChatFormatting.BLUE+10000);
-                            break;
-                        }
-                        case 1:{
-                            l.add(EnumChatFormatting.DARK_PURPLE+"最大输出:"+EnumChatFormatting.BLUE+192);
-                            l.add(EnumChatFormatting.DARK_PURPLE+"存储上限:"+EnumChatFormatting.BLUE+100000);
-                            break;
-                        }
-                        case 2:{
-                            l.add(EnumChatFormatting.DARK_PURPLE+"最大输出:"+EnumChatFormatting.BLUE+640);
-                            l.add(EnumChatFormatting.DARK_PURPLE+"存储上限:"+EnumChatFormatting.BLUE+1000000);
-                            break;}
-                    }
-
+                    l.add(EnumChatFormatting.DARK_PURPLE+ StatCollector.translateToLocalFormatted(
+                            "prex.tile.relay.output",EnumChatFormatting.BLUE+String.valueOf ((160*i*i)-32*i+64)));
+                    l.add(EnumChatFormatting.DARK_PURPLE+StatCollector.translateToLocalFormatted(
+                            "prex.tile.collector_store",EnumChatFormatting.BLUE+String.valueOf((int)(10000*Math.pow(10,i)))));
                 }else{
-                    l.add(EnumChatFormatting.DARK_PURPLE+"最高输出:"+EnumChatFormatting.BLUE+
-                            PrEXEMC.getEMCString(BigInteger.valueOf(64*(long)Math.pow(i+1,2))));
-                    l.add(EnumChatFormatting.DARK_PURPLE+"存储上限:"+((i!=15)?EnumChatFormatting.BLUE:EnumChatFormatting.DARK_RED)+
-                            PrEXEMC.getEMCString(BigDecimal.valueOf(Math.pow(i-2,2)*1000_0000).toBigInteger()));
+                    l.add(EnumChatFormatting.DARK_PURPLE+ StatCollector.translateToLocalFormatted(
+                            "prex.tile.relay.output",EnumChatFormatting.BLUE+
+                            PrEXEMC.getEMCString(BigInteger.valueOf(64*(long)Math.pow(i+1,2)))));
+                    l.add(EnumChatFormatting.DARK_PURPLE+StatCollector.translateToLocalFormatted(
+                            "prex.tile.collector_store",((i!=15)?EnumChatFormatting.BLUE:EnumChatFormatting.DARK_RED)+
+                            PrEXEMC.getEMCString(BigDecimal.valueOf(Math.pow(i-2,2)*1000_0000).toBigInteger())));
                 }
 
             }

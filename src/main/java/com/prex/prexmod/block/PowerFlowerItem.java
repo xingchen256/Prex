@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 
 import java.math.BigInteger;
 import java.util.List;
@@ -36,7 +37,7 @@ public class PowerFlowerItem extends ItemBlock {
                 break;
             }
         }
-        list.add(EnumChatFormatting.YELLOW + "最高效率: "+emc+"emc/s");
+        list.add(EnumChatFormatting.YELLOW + StatCollector.translateToLocalFormatted("prex.tile.powerflower_tips") +emc+"emc/s");
     }
     @Override
     public EnumRarity getRarity(ItemStack stack) {

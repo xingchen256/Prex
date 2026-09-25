@@ -12,6 +12,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraft.util.StatCollector;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 
@@ -141,10 +142,10 @@ public class KnowledgeShareBook extends Item {
                                EntityPlayer player,
                                List list,
                                boolean advanced) {
-        list.add("Shift右键记录你的知识");
-        list.add("右键获取里面的知识");
+        list.add(StatCollector.translateToLocalFormatted("prex.item.knowledge_share_book.tip1"));
+        list.add(StatCollector.translateToLocalFormatted("prex.item.knowledge_share_book.tip2"));
         if (stack.hasTagCompound() && stack.getTagCompound().hasKey("name")) {
-            list.add((EnumChatFormatting.GOLD+"作者:"+stack.getTagCompound().getString("name")));
+            list.add((EnumChatFormatting.GOLD+StatCollector.translateToLocalFormatted("prex.item.knowledge_share_book.tip3")+stack.getTagCompound().getString("name")));
         }
     }
 }

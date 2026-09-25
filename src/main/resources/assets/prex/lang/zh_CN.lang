@@ -175,6 +175,15 @@ item.prex_final_star.name=终极之心
 
 item.knowledge_share_book.name=知识共享之书
 
+prex.item.knowledge_share_book.tip1=Shift右键记录你的知识
+prex.item.knowledge_share_book.tip2=右键获取里面的知识
+prex.item.knowledge_share_book.tip3=作者:
+
+prex.item.finalStart_tip1=试试把它放到转化桌的左边,也许会给你提供些 EMC
+prex.item.finalStart_tip2=什么?EMC太高了?把它放到右边的中间试试,它会吞噬你所有的 EMC
+prex.item.finalStart_tip3=也有可能我记反了
+
+
 prex.command.set.max=EMC:%s过大,请试试小于10^64的值
 prex.command.set.num=请输入正确的正整数
 prex.command.setemc=已将%s设置为%s Emc
@@ -186,11 +195,22 @@ prex.command.ph=请手持物品在执行
 prex.command.reload.tok=EMC数据包已加载
 prex.command.ttth=手持物品使用/prex setEmc <EmcValue>|restEmc|removeEmc来设置,重置,删除超上限Emc表,将超限emc设为非超限请先移除emc
 
+prex.tile.emcmax=最大EMC输出
+prex.tile.emcstore=最大存储:
+prex.tile.tttip=对腐竹(服主)友好
+prex.tile.updateSpeed_tips=用于加速周围的方块、植物等的速度
+prex.tile.updateSpeed_size=作用范围:%s x %s x %s (以自身为中心)
+prex.tile.updateSpeed_ptb=方块最高作用系数:
+prex.tile.updateSpeed_ptf=随机刻最高作用系数:
+prex.tile.updateSpeed_othertips=放满一个区块腐竹(服主)高兴死了
+prex.tile.updateSpeedPowerFlower_tips=用于加速周围力量花盆的工作速度
+prex.tile.updateSpeedPowerFlower_pt=加速倍率:
+prex.tile.updateSpeedPowerFlower_othertips=对腐竹(服主)友好
+prex.tile.powerflower_tips=最高效率:
+prex.tile.collector_store=存储上限:%s
+prex.tile.relay.output=最大输出:%s
+
 item.prex.storage_cell=%s 级EMC能源存储磁盘
 item.prex.storage_component=%s 级EMC能源存储元件
-item.equivalentenergistics:EMCStorageComponent.8.name=9级EMC能源存储元件
-item.equivalentenergistics:EMCStorageComponent.9.name=10级EMC能源存储元件
-item.equivalentenergistics:EMCStorageComponent.10.name=11级EMC能源存储元件
-item.equivalentenergistics:EMCStorageComponent.11.name=12级EMC能源存储元件
-item.equivalentenergistics:EMCStorageComponent.12.name=13级EMC能源存储元件
-item.equivalentenergistics:EMCStorageComponent.13.name=14级EMC能源存储元件
+
+China.09_25.happy.something=中秋快乐!
